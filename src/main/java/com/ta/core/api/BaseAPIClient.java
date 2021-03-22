@@ -18,7 +18,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "unused"})
 public abstract class BaseAPIClient<T extends BaseAPIClient<T>> {
 
     @Getter
