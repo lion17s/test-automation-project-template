@@ -70,7 +70,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.testng/testng
     implementation group: 'org.testng', name: 'testng', version: '7.+'
 
-    // ui libs
+    // ui testing libs
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
     // https://mvnrepository.com/artifact/io.appium/java-client
@@ -78,7 +78,7 @@ dependencies {
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.+'
 
-    // api libs
+    // api testing libs
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
     implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.+'
     // https://mvnrepository.com/artifact/io.qameta.allure/allure-rest-assured
@@ -92,8 +92,6 @@ dependencies {
     // assertion libs
     // https://mvnrepository.com/artifact/org.assertj/assertj-core
     implementation group: 'org.assertj', name: 'assertj-core', version: '3.+'
-
-
 
     // test reporting libs
     // https://mvnrepository.com/artifact/io.qameta.allure/allure-testng
