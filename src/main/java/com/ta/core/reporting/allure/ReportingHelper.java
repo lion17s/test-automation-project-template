@@ -54,7 +54,7 @@ public class ReportingHelper {
     }
 
     public static void attachScreenshot(RemoteWebDriver driver, String name, boolean shouldAttach) {
-        if (shouldAttach) {
+        if (driver != null && shouldAttach) {
             byte[] screenshotByteArray = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             log.debug("attaching screenshot");
             Allure.addAttachment(name, new ByteArrayInputStream(screenshotByteArray));

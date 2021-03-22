@@ -1,5 +1,7 @@
 package com.ta.core.testng.listeners;
 
+import com.ta.core.driver.DriverFactory;
+import com.ta.core.reporting.allure.ReportingHelper;
 import lombok.extern.log4j.Log4j2;
 import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
@@ -9,10 +11,14 @@ import org.testng.xml.XmlSuite;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 
 @Log4j2
-public class BaseTestListener extends XMLReporter implements IReporter, ITestListener, ISuiteListener, IAnnotationTransformer {
+public class UITestListener extends XMLReporter implements IReporter, ITestListener, ISuiteListener, IAnnotationTransformer {
+
+    private Map<String, Object> capabilities;
 
     @Override
     public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
@@ -28,15 +34,21 @@ public class BaseTestListener extends XMLReporter implements IReporter, ITestLis
     @Override
     public void onTestStart(ITestResult result) {
         log.info(result.getMethod().getMethodName() + " STARTED");
+        capabilities = DriverFactory.getDriver().getCapabilities().asMap();
+        ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), false);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
+        ReportingHelper.attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), false);
+        ReportingHelper.attachVideo(DriverFactory.getDriver(), "video-" + UUID.randomUUID(), false);
         log.info(result.getMethod().getMethodName() + " PASSED");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
+        ReportingHelper.attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), true);
+        ReportingHelper.attachVideo(DriverFactory.getDriver(), "video-" + UUID.randomUUID(), false);
         log.info(result.getMethod().getMethodName() + " FAILED");
     }
 
@@ -52,6 +64,7 @@ public class BaseTestListener extends XMLReporter implements IReporter, ITestLis
 
     @Override
     public void onFinish(ISuite suite) {
+        ReportingHelper.attachEnvironmentInfo(capabilities);
         log.debug(suite.getName() + " execution finished");
     }
 
