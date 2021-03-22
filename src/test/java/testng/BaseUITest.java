@@ -12,14 +12,14 @@ import java.util.HashMap;
 @Listeners(UITestListener.class)
 public abstract class BaseUITest extends BaseTest {
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(groups = "ui.example.test")
     public void setupDriver() {
         String driver = Environment.get().getString("driver");
         DriverFactory.setDriver(driver, Environment.getObjectOrDefault(driver, new HashMap<>()));
 
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(groups = "ui.example.test")
     public void quitDriver() {
         DriverFactory.quitDriver();
     }
