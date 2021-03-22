@@ -8,7 +8,7 @@ To start test-automation on the project immediately without spending time on dev
 
 ## Quick start
 1. Create a folder with your test-automation project name
-2. Initialize a new repository and clone this project
+2. Clone https://github.com/lion17s/test-automation-project-template.git
 3. Change value of `rootProject.name` in `settings.gradle` file to yours
 4. Run example test by executing command from the root of the project folder:
     * Linux/MacOS: `./gradlew clean test -Denv=desktop.chrome -DincludeGroups=ui.test.example`
