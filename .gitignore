@@ -1,0 +1,7 @@
+/.idea/
+/target/
+/.allure/
+*.iml
+.gradle
+/build/
+**/.DS_Store

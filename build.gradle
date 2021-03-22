@@ -1,0 +1,102 @@
+buildscript {
+    repositories {
+        dependencies {
+            classpath "io.qameta.allure:allure-gradle:2.8.1"
+        }
+    }
+}
+
+plugins {
+    id 'idea'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group 'com.ta.template'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'io.qameta.allure'
+
+allure {
+    version = '2.10.0'
+    autoconfigure = true
+}
+
+sourceCompatibility = 1.8
+gradle.startParameter.continueOnFailure = true
+
+test {
+    systemProperties System.getProperties()
+    useTestNG() {
+        options.useDefaultListeners true
+        options.parallel System.getProperty('parallel', 'suites')
+        options.threadCount System.getProperty('threadCount', '1') as int
+        if (System.getProperty("includeGroups") != null) {
+            options.includeGroups System.getProperty("includeGroups")
+        }
+        if (System.getProperty("excludeGroups") != null) {
+            options.includeGroups System.getProperty("excludeGroups")
+        }
+        if (System.getProperty("suites") != null) {
+            options.suites System.getProperty("suites")
+        }
+        testLogging {
+            events = ['PASSED', 'FAILED', 'SKIPPED']
+        }
+    }
+    reports.html.enabled = false
+}
+
+dependencies {
+    // logging libs
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.+'
+
+    // config libs
+    // https://mvnrepository.com/artifact/com.typesafe/config
+    implementation group: 'com.typesafe', name: 'config', version: '1.+'
+
+    // boilerplate code processor libs
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly 'org.projectlombok:lombok:1.+'
+    annotationProcessor 'org.projectlombok:lombok:1.+'
+
+    // testing libs
+    // https://mvnrepository.com/artifact/org.testng/testng
+    implementation group: 'org.testng', name: 'testng', version: '7.+'
+
+    // ui libs
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
+    // https://mvnrepository.com/artifact/io.appium/java-client
+    implementation group: 'io.appium', name: 'java-client', version: '7.+'
+    // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.+'
+
+    // api libs
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.+'
+    // https://mvnrepository.com/artifact/io.qameta.allure/allure-rest-assured
+    implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.+'
+    // https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator
+    implementation (group: 'io.rest-assured', name: 'json-schema-validator', version: '4.+') {
+        exclude group: "com.google.guava", module: "guava" }
+    // https://mvnrepository.com/artifact/net.javacrumbs.json-unit/json-unit
+    implementation group: 'net.javacrumbs.json-unit', name: 'json-unit', version: '2.+'
+
+    // assertion libs
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.+'
+
+
+
+    // test reporting libs
+    // https://mvnrepository.com/artifact/io.qameta.allure/allure-testng
+    implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.+'
+
+}
