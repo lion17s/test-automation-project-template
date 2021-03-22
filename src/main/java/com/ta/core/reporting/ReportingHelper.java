@@ -36,11 +36,12 @@ public class ReportingHelper {
         if (driver instanceof AndroidDriver && shouldRecord) {
             log.debug("start recording android screen");
             ((AndroidDriver) driver).startRecordingScreen();
+            log.debug("android screen recording started");
         } else if (driver instanceof IOSDriver && shouldRecord) {
             log.debug("start recording ios screen");
             ((IOSDriver) driver).startRecordingScreen();
+            log.debug("ios screen recording started");
         }
-        log.debug("screen recording started");
     }
 
     public static void attachVideo(RemoteWebDriver driver, String name, boolean shouldAttach) {
