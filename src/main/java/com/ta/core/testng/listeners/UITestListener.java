@@ -1,7 +1,7 @@
 package com.ta.core.testng.listeners;
 
 import com.ta.core.driver.DriverFactory;
-import com.ta.core.reporting.ReportingHelper;
+import com.ta.core.reporting.allure.ReportingHelper;
 import lombok.extern.log4j.Log4j2;
 import org.testng.ISuite;
 import org.testng.ITestResult;
