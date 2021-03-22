@@ -1,10 +1,11 @@
-package testng;
+package testng.example;
 
 import org.testng.annotations.Test;
+import testng.BaseUITest;
 
-import static experiment.google.GoogleSearchPage.openGoogleSearchPage;
+import static example.pages.GoogleSearchPage.openGoogleSearchPage;
 
-public class UnitUITests extends BaseUITest {
+public class ExampleUITests extends BaseUITest {
 
     @Test
     public void verifyCanPerformSearch() {

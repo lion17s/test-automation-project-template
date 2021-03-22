@@ -1,4 +1,4 @@
-package experiment.google;
+package example.pages;
 
 import com.ta.core.driver.DriverFactory;
 import com.ta.core.ui.BaseUIElement;
