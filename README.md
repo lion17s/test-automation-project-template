@@ -14,7 +14,7 @@ To start test-automation on the project immediately without spending time on dev
 5. Run example test by executing command from the root of the project folder:
     * Linux/MacOS: `./gradlew clean test -Denv=desktop.chrome -DincludeGroups=ui.test.example`
     * Windows: `gradlew.bat clean test -Denv=desktop.chrome -DincludeGroups=ui.test.example`
-6. Generate and open html report:
+6. Generate and open [Allure](https://docs.qameta.io/allure/) report:
     * Linux/MacOS: `./gradlew allureReport & allureServe`
     * Windows: `gradlew.bat allureReport & allureServe`
 7. Enjoy the benefits of open-source!
