@@ -1,14 +1,14 @@
 package com.ta.core.testng.listeners;
 
-import io.appium.java_client.events.api.general.AppiumWebDriverEventListener;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 
 @Log4j2
-public class DriverEventListener implements AppiumWebDriverEventListener {
+public class DriverEventListener implements WebDriverEventListener {
 
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
@@ -93,16 +93,6 @@ public class DriverEventListener implements AppiumWebDriverEventListener {
     @Override
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences) {
         log.debug("changing value of element " + webElement.toString());
-    }
-
-    @Override
-    public void beforeChangeValueOf(WebElement element, WebDriver driver) {
-        log.debug("changing value of element " + element.toString());
-    }
-
-    @Override
-    public void afterChangeValueOf(WebElement element, WebDriver driver) {
-        log.debug("changed value of element " + element.toString());
     }
 
     @Override
