@@ -7,7 +7,7 @@ import static example.pages.GoogleSearchPage.openGoogleSearchPage;
 
 public class ExampleUITests extends BaseUITest {
 
-    @Test
+    @Test(groups = "ui.test.example")
     public void verifyCanPerformSearch() {
         openGoogleSearchPage()
                 .inputQuery("weather");
