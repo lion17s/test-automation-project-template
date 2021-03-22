@@ -2,6 +2,12 @@ package com.ta.core.testng.listeners;
 
 import com.ta.core.driver.DriverFactory;
 import com.ta.core.reporting.allure.ReportingHelper;
+import io.qameta.allure.restassured.AllureRestAssured;
+import io.restassured.RestAssured;
+import io.restassured.config.ObjectMapperConfig;
+import io.restassured.config.RestAssuredConfig;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import lombok.extern.log4j.Log4j2;
 import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
@@ -14,9 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static io.restassured.mapper.ObjectMapperType.GSON;
+
 
 @Log4j2
-public class UITestListener extends XMLReporter implements IReporter, ITestListener, ISuiteListener, IAnnotationTransformer {
+public class TestListener extends XMLReporter implements IReporter, ITestListener, ISuiteListener, IAnnotationTransformer {
 
     private Map<String, Object> capabilities;
 
@@ -29,13 +37,20 @@ public class UITestListener extends XMLReporter implements IReporter, ITestListe
     public void onStart(ISuite suite) {
         log.debug(suite.getName() + " execution started");
         super.getConfig().setGenerateTestResultAttributes(true);
+        RestAssured.config = RestAssuredConfig.config().objectMapperConfig(new ObjectMapperConfig(GSON));
+        RestAssured.filters(new AllureRestAssured());
+        if (log.isDebugEnabled()) {
+            RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+        }
     }
 
     @Override
     public void onTestStart(ITestResult result) {
         log.info(result.getMethod().getMethodName() + " STARTED");
-        capabilities = DriverFactory.getDriver().getCapabilities().asMap();
         ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), false);
+        if (DriverFactory.getDriver() != null) {
+            capabilities = DriverFactory.getDriver().getCapabilities().asMap();
+        }
     }
 
     @Override
