@@ -8,7 +8,7 @@ public class CatFactsAPIClient extends BaseAPIClient<CatFactsAPIClient> {
     private static final String BASE_PATH = "/facts";
 
     public CatFactsAPIClient getRandomFact() {
-        setResponse(RestAssured.get(BASE_PATH));
+        setResponse(RestAssured.given().basePath(BASE_PATH).get("/random"));
         return this;
     }
 
