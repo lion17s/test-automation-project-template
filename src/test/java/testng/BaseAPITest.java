@@ -9,7 +9,7 @@ import org.testng.annotations.Listeners;
 @Listeners(APITestListener.class)
 public abstract class BaseAPITest extends BaseTest {
 
-    @BeforeSuite(groups = "api.example.test", dependsOnMethods = "setupEnvironment")
+    @BeforeSuite(groups = "api.test.example", dependsOnMethods = "setupEnvironment")
     public void setupAPIClientEnvironment() {
         RestAssured.baseURI = Environment.get().getString("base.uri");
     }

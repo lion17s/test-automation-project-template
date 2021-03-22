@@ -7,7 +7,7 @@ import testng.BaseAPITest;
 
 public class ExampleAPITests extends BaseAPITest {
 
-    @Test(groups = "api.example.test")
+    @Test(groups = "api.test.example")
     public void verifyCanGetRandomCatsFact() {
         new CatFactsAPIClient()
                 .getRandomFact()
