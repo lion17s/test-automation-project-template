@@ -42,7 +42,7 @@ public class TestListener extends XMLReporter
 
     @Override
     public void onStart(ISuite suite) {
-        log.debug(suite.getName() + " execution started");
+        log.info(suite.getName() + " execution started");
         super.getConfig().setGenerateTestResultAttributes(true);
         RestAssured.config = RestAssuredConfig.config().objectMapperConfig(new ObjectMapperConfig(GSON));
         RestAssured.filters(new AllureRestAssured());
@@ -95,7 +95,7 @@ public class TestListener extends XMLReporter
     @Override
     public void onFinish(ISuite suite) {
         ReportingHelper.attachEnvironmentInfo(capabilities);
-        log.debug(suite.getName() + " execution finished");
+        log.info(suite.getName() + " execution finished");
     }
 
 }
