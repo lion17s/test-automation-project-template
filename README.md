@@ -24,9 +24,9 @@ To start test-automation on the project immediately without spending time on dev
 * ### environment.conf file
 
 [`environment.conf`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/resources/environment.conf) [HOCON](https://github.com/lightbend/config) file is a control center for the project. Put needed properties and get them in the code with functionality included in [`Environment.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/com/ta/core/env/Environment.java) class
-```json
+```
 env {
-   default { // required environment name for storing default values accross custom environments
+  default { // required environment name for storing default values accross custom environments
     driverWait = 5 // predefined key used to control element presence implemented in BaseUIElement.java class
     attachScreenshot = true // predefined key used to control attaching screenshot on test failure. Works for desktop browsers, iOS, Android
     alwaysAttachScreenshot = false // predefined key used to control attaching screenshot after test finishes. Works for desktop browsers, iOS, Android
