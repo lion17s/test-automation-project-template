@@ -3,7 +3,7 @@ package testng.example;
 import org.testng.annotations.Test;
 import testng.BaseUITest;
 
-import static example.pages.GoogleSearchPage.openGoogleSearchPage;
+import static example.ui.pages.GoogleSearchPage.openGoogleSearchPage;
 
 public class ExampleUITests extends BaseUITest {
 

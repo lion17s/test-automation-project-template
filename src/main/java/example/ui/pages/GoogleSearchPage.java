@@ -1,4 +1,4 @@
-package example.pages;
+package example.ui.pages;
 
 import com.ta.core.driver.DriverFactory;
 import com.ta.core.ui.BaseUIElement;
