@@ -35,7 +35,7 @@ env {
     alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android
   }
   iphone.12.pro.max.safari { // custom environment name for storing related properties
-    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox
+    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, remote
     appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
     appium.automationName = XCUITest
     appium.platformName = iOS
