@@ -18,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -103,6 +104,10 @@ public class DriverFactory {
 
     public static RemoteWebDriver getDriver() {
         return DRIVER_INSTANCE.get();
+    }
+
+    public static WebDriverWait getDriverWait(int timeOutInSeconds) {
+        return new WebDriverWait(DRIVER_INSTANCE.get(), timeOutInSeconds);
     }
 
     public static void quitDriver() {
