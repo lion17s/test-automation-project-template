@@ -43,9 +43,13 @@ public class Environment {
     }
 
     public static boolean getBooleanOrDefault(String path, boolean defaultValue) {
+        log.debug("getting value by path <" + path + ">");
         if (Environment.get().hasPath(path)) {
-            return Environment.get().getBoolean(path);
+            boolean value = Environment.get().getBoolean(path);
+            log.debug("<" + path + "> value is: <" + value + ">");
+            return value;
         } else {
+            log.debug("cannot find path <" + path + "> returning default value: <" + defaultValue + ">");
             return defaultValue;
         }
     }
