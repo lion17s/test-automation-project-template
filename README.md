@@ -27,14 +27,15 @@ To start test-automation on the project immediately without spending time on dev
 ```
 env {
   default { // required environment name for storing default values accross custom environments
-    driverWait = 5 // predefined key used to control element presence implemented in BaseUIElement.java class
-    attachScreenshot = true // predefined key used to control attaching screenshot on test failure. Works for desktop browsers, iOS, Android
-    alwaysAttachScreenshot = false // predefined key used to control attaching screenshot after test finishes. Works for desktop browsers, iOS, Android
-    attachVideo = true // predefined key used to control attaching video on test failure. Works for iOS, Android
-    alwaysAttachVideo = false // predefined key used to control attaching video after test finishes. Works for iOS, Android
+    driverWait = 5 // used to control element presence
+    retryOnFail = 1 // used to control tests rerun count in case of fail result
+    attachScreenshot = true // used to control attaching screenshot on test failure. Works for desktop browsers, iOS, Android
+    alwaysAttachScreenshot = false // used to control attaching screenshot after test finishes. Works for desktop browsers, iOS, Android
+    attachVideo = true // used to control attaching video on test failure. Works for iOS, Android
+    alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android
   }
   iphone.12.pro.max.safari { // custom environment name for storing related properties
-    driver = appium // predeined key used to set driver to be initilized. Available values: appium, chrome, firefox
+    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox
     appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
     appium.automationName = XCUITest
     appium.platformName = iOS
@@ -45,7 +46,7 @@ env {
   }
   desktop.chrome {
     driver = chrome
-    chrome.arguments = [--headless] // <driver_name>.arguments - predefined key for storing driver cli arguments. Current value is array as per chromedriver requirements
+    chrome.arguments = [--headless] // <driver_name>.arguments - used for storing driver cli arguments. Current value is an array as per chromedriver requirements
   }
   cats.api {
     base.uri = "https://cat-fact.herokuapp.com" // custom property
