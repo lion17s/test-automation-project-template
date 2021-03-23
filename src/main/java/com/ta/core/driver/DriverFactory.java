@@ -5,10 +5,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.mac.Mac2Driver;
-import io.appium.java_client.mac.Mac2Element;
-import io.appium.java_client.windows.WindowsDriver;
-import io.appium.java_client.windows.WindowsElement;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -64,10 +60,6 @@ public class DriverFactory {
             IOSDriver<MobileElement> iosDriver = new IOSDriver<>(url, desiredCapabilities);
             log.debug("appium ios driver initialized with capabilities: " + url + "\n" + desiredCapabilities);
             return iosDriver;
-        } else if (platformName.equalsIgnoreCase(Platform.WINDOWS.name())) {
-            return new WindowsDriver<WindowsElement>(url, desiredCapabilities);
-        } else if (platformName.equalsIgnoreCase(Platform.MAC.name())) {
-            return new Mac2Driver<Mac2Element>(url, desiredCapabilities);
         } else {
             throw new ExceptionInInitializerError("missing <platformName> capability");
         }
