@@ -23,7 +23,7 @@ To start test-automation on the project immediately without spending time on dev
 
 * ### environment.conf file
 
-[`environment.conf`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/resources/environment.conf) [HOCON](https://github.com/lightbend/config) file is a control center for the project. Put needed properties and get them in the code with functionality included in [`Environment.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/com/ta/core/env/Environment.java) class
+[`environment.conf`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/resources/environment.conf) - [HOCON](https://github.com/lightbend/config) file is a control center for the project. Put needed properties and get them in the code with functionality included in [`Environment.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/com/ta/core/env/Environment.java) class
 ```
 env {
   default { // required environment name for storing default values accross custom environments
