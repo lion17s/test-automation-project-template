@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @Log4j2
+@SuppressWarnings("unused")
 public class DriverFactory {
 
     private static final ThreadLocal<RemoteWebDriver> DRIVER_INSTANCE = new ThreadLocal<>();
