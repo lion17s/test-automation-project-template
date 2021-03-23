@@ -42,4 +42,12 @@ public class Environment {
         }
     }
 
+    public static boolean getBooleanOrDefault(String path, boolean defaultValue) {
+        if (Environment.get().hasPath(path)) {
+            return Environment.get().getBoolean(path);
+        } else {
+            return defaultValue;
+        }
+    }
+
 }
