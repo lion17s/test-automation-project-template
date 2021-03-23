@@ -10,6 +10,7 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.HasCapabilities;
 import org.testng.*;
 import org.testng.annotations.ITestAnnotation;
 import org.testng.reporters.XMLReporter;
@@ -55,7 +56,7 @@ public class TestListener extends XMLReporter
         log.info(result.getMethod().getMethodName() + " STARTED");
         ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), false);
         if (DriverFactory.getDriver() != null) {
-            capabilities = DriverFactory.getDriver().getCapabilities().asMap();
+            capabilities = ((HasCapabilities) DriverFactory.getDriver()).getCapabilities().asMap();
             shouldAlwaysAttachScreenshot = Environment.getValueOrDefault("alwaysAttachScreenshot", false);
             shouldAlwaysAttachVideo = Environment.getValueOrDefault("alwaysAttachVideo", false);
             shouldAttachScreenshot = Environment.getValueOrDefault("attachScreenshot", shouldAlwaysAttachScreenshot);

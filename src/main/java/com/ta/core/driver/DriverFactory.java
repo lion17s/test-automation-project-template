@@ -12,6 +12,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -28,7 +29,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class DriverFactory {
 
-    private static final ThreadLocal<RemoteWebDriver> DRIVER_INSTANCE = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> DRIVER_INSTANCE = new ThreadLocal<>();
 
     private static String getPlatformNameFromCapabilities(Map<String, Object> capabilities) {
         return capabilities.getOrDefault("platformName", "").toString();
@@ -103,7 +104,7 @@ public class DriverFactory {
         DRIVER_INSTANCE.set(driver);
     }
 
-    public static RemoteWebDriver getDriver() {
+    public static WebDriver getDriver() {
         return DRIVER_INSTANCE.get();
     }
 
