@@ -4,7 +4,7 @@
 Test-automation project template with ready-to-start developing auto scripts functionality to test WEB UI, Rest-API, Mobile(iOS, Android). NOT another "wrapper-test-automation-framework", just a "minimal facade" for popular open-source instruments: TestNG, Selenium, REST-assured, Allure. Extend/modify it in a way required to match your test-automation needs
 
 ## Purpose
-To start test-automation on the project immediately without spending time on developing basic functionality
+To start test-automation immediately without spending time on developing of basic functionality
 
 ## Quick start
 1. Create a folder with your test-automation project name
