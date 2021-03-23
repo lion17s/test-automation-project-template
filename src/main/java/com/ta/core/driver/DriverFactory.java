@@ -52,13 +52,18 @@ public class DriverFactory {
     }
 
     private static AppiumDriver<?> initAppiumDriver(Map<String, Object> capabilities) {
+        log.debug("initializing appium driver");
         URL url = getURLFromCapabilities(capabilities);
         String platformName = getPlatformNameFromCapabilities(capabilities);
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities(capabilities);
         if (platformName.equalsIgnoreCase(Platform.ANDROID.name())) {
-            return new AndroidDriver<MobileElement>(url, desiredCapabilities);
+            AndroidDriver<MobileElement> androidDriver = new AndroidDriver<>(url, desiredCapabilities);
+            log.debug("appium android driver initialized with capabilities: " + url + "\n" + desiredCapabilities);
+            return androidDriver;
         } else if (platformName.equalsIgnoreCase(Platform.IOS.name())) {
-            return new IOSDriver<MobileElement>(url, desiredCapabilities);
+            IOSDriver<MobileElement> iosDriver = new IOSDriver<>(url, desiredCapabilities);
+            log.debug("appium ios driver initialized with capabilities: " + url + "\n" + desiredCapabilities);
+            return iosDriver;
         } else if (platformName.equalsIgnoreCase(Platform.WINDOWS.name())) {
             return new WindowsDriver<WindowsElement>(url, desiredCapabilities);
         } else if (platformName.equalsIgnoreCase(Platform.MAC.name())) {
@@ -70,7 +75,10 @@ public class DriverFactory {
 
     private static WebDriver initRemoteWebDriver(Map<String, Object> capabilities) {
         if (!getURLFromCapabilities(capabilities).toString().isEmpty()) {
-            return registerEventFiringDriver(new RemoteWebDriver(getURLFromCapabilities(capabilities), new DesiredCapabilities(capabilities)));
+            URL url = getURLFromCapabilities(capabilities);
+            WebDriver remoteWebDriver = new RemoteWebDriver(url, new DesiredCapabilities(capabilities));
+            log.debug("remote web driver initialized with capabilities: " + url + "\n" + capabilities);
+            return registerEventFiringDriver(remoteWebDriver);
         } else {
             throw new ExceptionInInitializerError("missing <hub> capability");
         }
@@ -78,18 +86,23 @@ public class DriverFactory {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static WebDriver initWebDriver(String driverName, Map<String, Object> capabilities) {
+        WebDriver driver;
         if (driverName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions chromeOptions = new ChromeOptions();
             capabilities.forEach(chromeOptions::setCapability);
             chromeOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
-            return registerEventFiringDriver(new ChromeDriver(chromeOptions));
+            driver = new ChromeDriver(chromeOptions);
+            log.debug("chrome driver initialized with options:\n" + chromeOptions);
+            return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             capabilities.forEach(firefoxOptions::setCapability);
             firefoxOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
-            return registerEventFiringDriver(new FirefoxDriver(firefoxOptions));
+            driver = new FirefoxDriver(firefoxOptions);
+            log.debug("firefox driver initialized with options:\n" + firefoxOptions);
+            return registerEventFiringDriver(driver);
         } else {
             throw new ExceptionInInitializerError("missing <driver> capability");
         }
@@ -127,6 +140,7 @@ public class DriverFactory {
         if (DRIVER_INSTANCE.get() != null) {
             DRIVER_INSTANCE.get().quit();
             DRIVER_INSTANCE.remove();
+            log.debug("driver quit");
         }
     }
 
