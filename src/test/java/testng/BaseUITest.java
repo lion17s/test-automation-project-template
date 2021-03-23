@@ -12,7 +12,7 @@ public abstract class BaseUITest extends BaseTest {
     @BeforeMethod(groups = "ui.test.example")
     public void setupDriver() {
         String driver = Environment.get().getString("driver");
-        DriverFactory.setDriver(driver, Environment.getObjectOrDefault(driver, new HashMap<>()));
+        DriverFactory.setDriver(driver, Environment.getValueOrDefault(driver, new HashMap<>()));
 
     }
 
