@@ -18,4 +18,42 @@ To start test-automation on the project immediately without spending time on dev
     * Linux/MacOS: `./gradlew allureReport & allureServe`
     * Windows: `gradlew.bat allureReport & allureServe`
 7. Enjoy the benefits of open-source!
+
+## Overview
+
+* ### environment.conf file
+
+[`environment.conf`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/resources/environment.conf) [HOCON](https://github.com/lightbend/config) file is a control center for the project. Put needed properties and get them in the code with functionality included in [`Environment.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/com/ta/core/env/Environment.java) class
+```json
+env {
+   default { // required environment name for storing default values accross custom environments
+    driverWait = 5 // predefined key used to control element presence implemented in BaseUIElement.java class
+    attachScreenshot = true // predefined key used to control attaching screenshot on test failure. Works for desktop browsers, iOS, Android
+    alwaysAttachScreenshot = false // predefined key used to control attaching screenshot after test finishes. Works for desktop browsers, iOS, Android
+    attachVideo = true // predefined key used to control attaching video on test failure. Works for iOS, Android
+    alwaysAttachVideo = false // predefined key used to control attaching video after test finishes. Works for iOS, Android
+  }
+  iphone.12.pro.max.safari { // custom environment name for storing related properties
+    driver = appium // predeined key used to set driver to be initilized. Available values: appium, chrome, firefox
+    appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
+    appium.automationName = XCUITest
+    appium.platformName = iOS
+    appium.platformVersion = "14.4"
+    appium.deviceName = iPhone 12 Pro Max
+    appium.browserName = Safari
+    appium.isHeadless = true
+  }
+  desktop.chrome {
+    driver = chrome
+    chrome.arguments = [--headless] // <driver_name>.arguments - predefined key for storing driver cli arguments. Current value is array as per chromedriver requirements
+  }
+  cats.api {
+    base.uri = "https://cat-fact.herokuapp.com" // custom property
+  }
+
+}
+```
+
+
+
    
