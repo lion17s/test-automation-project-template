@@ -1,5 +1,6 @@
 package com.ta.core.driver;
 
+import com.ta.core.testng.listeners.DriverEventListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -19,6 +20,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
@@ -40,6 +42,15 @@ public class DriverFactory {
         return new URL(capabilities.getOrDefault("hub", "").toString());
     }
 
+    public static EventFiringWebDriver registerEventFiringDriver(WebDriver driver) {
+        log.debug("registering firing event driver");
+        EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
+        DriverEventListener driverEventListener = new DriverEventListener();
+        eventFiringWebDriver.register(driverEventListener);
+        log.debug("event firing driver registered");
+        return eventFiringWebDriver;
+    }
+
     private static AppiumDriver<?> initAppiumDriver(Map<String, Object> capabilities) {
         URL url = getURLFromCapabilities(capabilities);
         String platformName = getPlatformNameFromCapabilities(capabilities);
@@ -57,35 +68,35 @@ public class DriverFactory {
         }
     }
 
-    private static RemoteWebDriver initRemoteWebDriver(Map<String, Object> capabilities) {
+    private static WebDriver initRemoteWebDriver(Map<String, Object> capabilities) {
         if (!getURLFromCapabilities(capabilities).toString().isEmpty()) {
-            return new RemoteWebDriver(getURLFromCapabilities(capabilities), new DesiredCapabilities(capabilities));
+            return registerEventFiringDriver(new RemoteWebDriver(getURLFromCapabilities(capabilities), new DesiredCapabilities(capabilities)));
         } else {
             throw new ExceptionInInitializerError("missing <hub> capability");
         }
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private static RemoteWebDriver initWebDriver(String driverName, Map<String, Object> capabilities) {
+    private static WebDriver initWebDriver(String driverName, Map<String, Object> capabilities) {
         if (driverName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions chromeOptions = new ChromeOptions();
             capabilities.forEach(chromeOptions::setCapability);
             chromeOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
-            return new ChromeDriver(chromeOptions);
+            return registerEventFiringDriver(new ChromeDriver(chromeOptions));
         } else if (driverName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             capabilities.forEach(firefoxOptions::setCapability);
             firefoxOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
-            return new FirefoxDriver(firefoxOptions);
+            return registerEventFiringDriver(new FirefoxDriver(firefoxOptions));
         } else {
             throw new ExceptionInInitializerError("missing <driver> capability");
         }
     }
 
     public static void setDriver(String driverName, Map<String, Object> capabilities) {
-        RemoteWebDriver driver = null;
+        WebDriver driver = null;
         switch (driverName.toLowerCase()) {
             case "appium": {
                 driver = initAppiumDriver(capabilities);
