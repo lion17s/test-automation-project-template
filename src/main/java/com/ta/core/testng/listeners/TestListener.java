@@ -1,6 +1,7 @@
 package com.ta.core.testng.listeners;
 
 import com.ta.core.driver.DriverFactory;
+import com.ta.core.env.Environment;
 import com.ta.core.reporting.allure.ReportingHelper;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -24,9 +25,14 @@ import static io.restassured.mapper.ObjectMapperType.GSON;
 
 
 @Log4j2
-public class TestListener extends XMLReporter implements IReporter, ITestListener, ISuiteListener, IAnnotationTransformer {
+public class TestListener extends XMLReporter
+        implements IReporter, ITestListener, ISuiteListener, IAnnotationTransformer {
 
     private Map<String, Object> capabilities;
+    private boolean shouldAlwaysAttachScreenshot;
+    private boolean shouldAlwaysAttachVideo;
+    private boolean shouldAttachScreenshot;
+    private boolean shouldAttachVideo;
 
     @Override
     public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
@@ -50,21 +56,29 @@ public class TestListener extends XMLReporter implements IReporter, ITestListene
         ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), false);
         if (DriverFactory.getDriver() != null) {
             capabilities = DriverFactory.getDriver().getCapabilities().asMap();
+            shouldAlwaysAttachScreenshot = Environment.getBooleanOrDefault("alwaysAttachScreenshot", false);
+            shouldAlwaysAttachVideo = Environment.getBooleanOrDefault("alwaysAttachVideo", false);
+            shouldAttachScreenshot = Environment.getBooleanOrDefault("attachScreenshot", shouldAlwaysAttachScreenshot);
+            shouldAttachVideo = Environment.getBooleanOrDefault("attachVideo", shouldAlwaysAttachVideo);
         }
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        ReportingHelper.attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), false);
-        ReportingHelper.attachVideo(DriverFactory.getDriver(), "video-" + UUID.randomUUID(), false);
         log.info(result.getMethod().getMethodName() + " PASSED");
+        ReportingHelper
+                .attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), shouldAlwaysAttachScreenshot);
+        ReportingHelper
+                .attachVideo(DriverFactory.getDriver(), "video-" + UUID.randomUUID(), shouldAlwaysAttachVideo);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        ReportingHelper.attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), true);
-        ReportingHelper.attachVideo(DriverFactory.getDriver(), "video-" + UUID.randomUUID(), false);
         log.info(result.getMethod().getMethodName() + " FAILED");
+        ReportingHelper
+                .attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), shouldAttachScreenshot);
+        ReportingHelper
+                .attachVideo(DriverFactory.getDriver(), "video-" + UUID.randomUUID(), shouldAttachVideo);
     }
 
     @Override
