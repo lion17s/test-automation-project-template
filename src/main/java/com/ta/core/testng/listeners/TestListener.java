@@ -54,7 +54,6 @@ public class TestListener extends XMLReporter
     @Override
     public void onTestStart(ITestResult result) {
         log.info(result.getMethod().getMethodName() + " STARTED");
-        ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), false);
         if (DriverFactory.getDriver() != null) {
             capabilities = ((HasCapabilities) DriverFactory.getDriver()).getCapabilities().asMap();
             shouldAlwaysAttachScreenshot = Environment.getValueOrDefault("alwaysAttachScreenshot", false);
@@ -62,6 +61,7 @@ public class TestListener extends XMLReporter
             shouldAttachScreenshot = Environment.getValueOrDefault("attachScreenshot", shouldAlwaysAttachScreenshot);
             shouldAttachVideo = Environment.getValueOrDefault("attachVideo", shouldAlwaysAttachVideo);
         }
+        ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), shouldAttachVideo);
     }
 
     @Override
