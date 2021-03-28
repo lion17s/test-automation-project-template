@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
-import java.util.function.BiFunction;
 
 @Log4j2
 public class Environment {
@@ -31,18 +30,15 @@ public class Environment {
 
     @SuppressWarnings("unchecked")
     public static <T> T getValueOrDefault(String path, T defaultValue) {
-        BiFunction<String, T, T> biFunction = (arg0, arg1) -> {
-            log.debug("getting value by path <" + arg0 + ">");
-            if (Environment.get().hasPath(arg0)) {
-                T value = (T) Environment.get().getAnyRef(arg0);
-                log.debug("<" + arg0 + "> value is: <" + value.toString() + ">");
-                return value;
-            } else {
-                log.debug("cannot find path <" + arg0 + "> returning default value: <" + arg1.toString() + ">");
-                return arg1;
-            }
-        };
-        return biFunction.apply(path, defaultValue);
+        log.debug("getting value by path <" + path + ">");
+        if (Environment.get().hasPath(path)) {
+            T value = (T) Environment.get().getAnyRef(path);
+            log.debug("<" + path + "> value is: <" + value.toString() + ">");
+            return value;
+        } else {
+            log.debug("cannot find path <" + path + "> returning default value: <" + defaultValue.toString() + ">");
+            return defaultValue;
+        }
     }
 
 }
