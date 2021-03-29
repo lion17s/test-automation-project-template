@@ -15,19 +15,27 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-    - name: Install Appium Server
-      run: npm install -g appium
-    - name: Run Appium Server
-      run: appium -p 4723 --log appium.log &
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Test with Gradle
-      run: ./gradlew clean test -Denv=iphone.12.pro.max.safari -DincludeGroups=ui.test.example --info
-    - name: Print Appium logs
-      if: ${{ always() }}
-      run: cat appium.log
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Install Appium Server
+        run: npm install -g appium
+      - name: Run Appium Server
+        run: appium -p 4723 --log appium.log &
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Test with Gradle
+        run: ./gradlew clean test -Denv=iphone.12.pro.max.safari -DincludeGroups=ui.test.example --info
+      - name: Print Appium logs
+        if: ${{ always() }}
+        run: cat appium.log
+      - name: Generate Allure report
+        if: ${{ always() }}
+        run: ./gradlew downloadAllure && allureReport
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report
+          path: ./build/reports/allure-report
