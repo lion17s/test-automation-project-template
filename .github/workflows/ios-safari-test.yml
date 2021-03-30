@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Install ffmpeg codec
+        run: brew install ffmpeg
       - name: Install Appium Server
         run: npm install -g appium
       - name: Run Appium Server
