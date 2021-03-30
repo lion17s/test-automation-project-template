@@ -38,7 +38,7 @@ public class DriverFactory {
         return new URL(capabilities.getOrDefault("hub", "").toString());
     }
 
-    public static EventFiringWebDriver registerEventFiringDriver(WebDriver driver) {
+    private static EventFiringWebDriver registerEventFiringDriver(WebDriver driver) {
         log.debug("registering firing event driver");
         EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
         DriverEventListener driverEventListener = new DriverEventListener();
