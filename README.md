@@ -27,15 +27,15 @@ To start test-automation immediately without spending time on developing of basi
 ```
 env {
   default { // required environment name for storing default values accross custom environments
-    driverWait = 5 // used to control element presence
-    retryOnFail = 1 // used to control tests rerun count in case of fail result
-    attachScreenshot = true // used to control attaching screenshot on test failure. Works for desktop browsers, iOS, Android
-    alwaysAttachScreenshot = false // used to control attaching screenshot after test finishes. Works for desktop browsers, iOS, Android
-    attachVideo = true // used to control attaching video on test failure. Works for iOS, Android
-    alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android
+    driverWait = 5 // used to control wait time until element presence. Default value is 3
+    retryOnFail = 1 // used to control tests rerun count in case of fail result. Default value is 0
+    attachScreenshot = true // used to control attaching screenshot on test failure. Works for desktop browsers, iOS, Android. Default value is false
+    alwaysAttachScreenshot = false // used to control attaching screenshot after test finishes. Works for desktop browsers, iOS, Android. Default value is false
+    attachVideo = true // used to control attaching video on test failure. Works for iOS, Android. Default value is false
+    alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android. Default value is false
   }
   iphone.12.pro.max.safari { // custom environment name for storing related properties
-    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, remote
+    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, remote. No default value, please set explicitly with using of DrverFactory.setDriver(driverName, capabilities)
     appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
     appium.automationName = XCUITest
     appium.platformName = iOS
@@ -54,3 +54,14 @@ env {
 
 }
 ```
+
+* ### UI testing
+Use `DriverFactory.setDriver(driverName, capabilities)` to set driver.
+To get driver instance simply use `DriverFactory.getDriver()`. To get a particular driver just cast your driver instance: `(IOSDriver) DriverFactory.getDriver()` or `(AndroidDriver) DriverFactory.getDriver()` or `(RemoteWebDriver) DriverFactory.getDriver()` or `(AppiumDriver) DriverFactory.getDriver()`.
+Use `DriverFactory.quitDriver()` for driver instance to quit. Use `DriverFactory.getDriverWait(timeOutInSeconds)` to get explicit wait with ability to define wait condition.
+Explicit driver wait will override `driverWait` setting defined in `environment.conf` or it's default value.
+Page Object Pattern is suggested to use. Refer to [`BaseUITest.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/BaseUITest.java) class on driver control examples, [`GoogleSearchPage.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/example/ui/pages/GoogleSearchPage.java) on page object example and [`ExampleUITests.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/example/ExampleUITests.java) for test example.
+
+* ### API testing
+Use `setResponse()` method and define request as a parameter. Use `getResponse()` to get response.
+"Client" Object Pattern(same idea as for Page Object Pattern) suggested to use. Please refer to [`CatFactsAPIClient.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/example/api/clients/CatFactsAPIClient.java), [`BaseAPITest.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/BaseAPITest.java) and [`ExampleAPITests.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/example/ExampleAPITests.java) for examples.
