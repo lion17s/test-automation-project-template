@@ -56,12 +56,12 @@ env {
 ```
 
 * ### UI testing
-Use `DriverFactory.setDriver(driverName, capabilities)` to set driver.
-1. To get driver instance simply use `DriverFactory.getDriver()`. 
-2. To get a particular driver just cast your driver instance: `(IOSDriver) DriverFactory.getDriver()` or `(AndroidDriver) DriverFactory.getDriver()` or `(RemoteWebDriver) DriverFactory.getDriver()` or `(AppiumDriver) DriverFactory.getDriver()`.
-3. Use `DriverFactory.quitDriver()` for driver instance to quit.
-4. Use `DriverFactory.getDriverWait(timeOutInSeconds)` to get explicit wait with ability to define wait condition. Explicit driver wait will override `driverWait` setting defined in `environment.conf` or it's default value.
-5. Page Object Pattern is suggested to use. Refer to [`BaseUITest.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/BaseUITest.java) class on driver control examples, [`GoogleSearchPage.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/example/ui/pages/GoogleSearchPage.java) on page object example and [`ExampleUITests.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/example/ExampleUITests.java) for test example.
+1. Use `DriverFactory.setDriver(driverName, capabilities)` to set driver.
+2. To get driver instance simply use `DriverFactory.getDriver()`. 
+3. To get a particular driver just cast your driver instance: `(IOSDriver) DriverFactory.getDriver()` or `(AndroidDriver) DriverFactory.getDriver()` or `(RemoteWebDriver) DriverFactory.getDriver()` or `(AppiumDriver) DriverFactory.getDriver()`.
+4. Use `DriverFactory.quitDriver()` for driver instance to quit.
+5. Use `DriverFactory.getDriverWait(timeOutInSeconds)` to get explicit wait with ability to define wait condition. Explicit driver wait will override `driverWait` setting defined in `environment.conf` or it's default value.
+6. Page Object Pattern is suggested to use. Refer to [`BaseUITest.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/BaseUITest.java) class on driver control examples, [`GoogleSearchPage.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/example/ui/pages/GoogleSearchPage.java) on page object example and [`ExampleUITests.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/example/ExampleUITests.java) for test example.
 
 * ### API testing
 1. Use `setResponse()` method and define request as a parameter. Use `getResponse()` to get response.
