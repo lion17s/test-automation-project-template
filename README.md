@@ -1,10 +1,10 @@
 # test-automation-project-template
 
-https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/codeql-analysis.yml/badge.svg
-https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/ios-safari-test.yml/badge.svg
-https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/linux-api-test.yml/badge.svg
-https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/linux-chrome-test.yml/badge.svg
-https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/windows-chrome-test.yml/badge.svg
+![CodeQL](https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/codeql-analysis.yml/badge.svg)
+![iOS Safari Test](https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/ios-safari-test.yml/badge.svg)
+![Linux API Test](https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/linux-api-test.yml/badge.svg)
+![Linux Chrome Test](https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/linux-chrome-test.yml/badge.svg)
+![Windows Chrome Test](https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/windows-chrome-test.yml/badge.svg)
 
 
 ## Description
