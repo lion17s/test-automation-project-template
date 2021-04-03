@@ -1,5 +1,12 @@
 # test-automation-project-template
 
+https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/codeql-analysis.yml/badge.svg
+https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/ios-safari-test.yml/badge.svg
+https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/linux-api-test.yml/badge.svg
+https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/linux-chrome-test.yml/badge.svg
+https://github.com/lion17s/test-automation-project-template/blob/main/.github/workflows/windows-chrome-test.yml/badge.svg
+
+
 ## Description
 Test-automation project template with ready-to-start developing auto scripts functionality to test WEB UI, Rest-API, Mobile(iOS, Android). NOT another "wrapper-test-automation-framework", just a "minimal facade" for popular open-source instruments: TestNG, Selenium, REST-assured, Allure. Extend/modify it in a way required to match your test-automation needs
 
