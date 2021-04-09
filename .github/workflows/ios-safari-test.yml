@@ -15,8 +15,10 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Cache gradle
+        uses: actions/cache@v2
         with:
           path: |
             ~/.gradle/caches
@@ -24,7 +26,8 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - uses: actions/cache@v2
+      - name: Cache node
+        uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
