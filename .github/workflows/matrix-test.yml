@@ -16,8 +16,8 @@ jobs:
     strategy:
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
-        group: [ cats.api, ui.test.example ]
-        env: [ desktop.chrome, desktop.firefox ]
+        group: [ ui.test.example, api.test.example ]
+        env: [ cats.api, desktop.chrome, desktop.firefox ]
         include:
           - os: macos-latest
             group: ui.test.example
