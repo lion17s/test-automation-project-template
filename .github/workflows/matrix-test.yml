@@ -55,6 +55,11 @@ jobs:
           - os: ubuntu-latest
             env: desktop.ie
 
+          - os: macos-latest
+            env: desktop.edge
+          - os: macos-latest
+            env: desktop.ie
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
