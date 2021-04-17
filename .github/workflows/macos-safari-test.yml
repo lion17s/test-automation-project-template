@@ -36,9 +36,6 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Gradle
         run: ./gradlew clean test -Denv=iphone.12.pro.max.safari -DincludeGroups=ui.test.example --info
-      - name: Print Appium logs
-        if: ${{ always() }}
-        run: cat appium.log
       - name: Download Allure CLI
         if: ${{ always() }}
         run: ./gradlew downloadAllure
