@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.group }}
     strategy:
       matrix:
         group: [api.test.example, ui.test.example ]
