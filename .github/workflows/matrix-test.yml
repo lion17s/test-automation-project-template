@@ -34,6 +34,14 @@ jobs:
             os: macos-latest
           - env: desktop.ie
             os: ubuntu-latest
+          - group: api.test.example
+            env: desktop.chrome
+          - group: api.test.example
+            env: desktop.firefox
+          - group: api.test.example
+            env: desktop.edge
+          - group: api.test.example
+            env: desktop.ie
 
     steps:
       - name: Checkout source code
