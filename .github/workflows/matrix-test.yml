@@ -21,10 +21,16 @@ jobs:
         include:
           - os: macos-latest
             group: ui.test.example
-            env: [ iphone.12.pro.max.safari, desktop.safari ]
+            env: iphone.12.pro.max.safari
+          - os: macos-latest
+            group: ui.test.example
+            env: desktop.safari
           - os: windows-latest
             group: ui.test.example
-            env: [ desktop.ie, desktop.edge ]
+            env: desktop.ie
+          - os: windows-latest
+            group: ui.test.example
+            env: desktop.edge
 
     steps:
       - name: Checkout source code
