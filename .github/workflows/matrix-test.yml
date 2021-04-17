@@ -31,6 +31,9 @@ jobs:
           - os: windows-latest
             group: ui.test.example
             env: desktop.edge
+        exclude:
+          - group: ui.test.example
+            env: cats.api
 
     steps:
       - name: Checkout source code
