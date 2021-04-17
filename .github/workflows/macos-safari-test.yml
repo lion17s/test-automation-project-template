@@ -35,7 +35,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Test with Gradle
-        run: ./gradlew clean test -Denv=iphone.12.pro.max.safari -DincludeGroups=ui.test.example --info
+        run: ./gradlew clean test -Denv=desktop.safari -DincludeGroups=ui.test.example --info
       - name: Download Allure CLI
         if: ${{ always() }}
         run: ./gradlew downloadAllure
