@@ -16,25 +16,31 @@ jobs:
     strategy:
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
-        group: [ ui.test.example, api.test.example ]
-        env: [ cats.api, desktop.chrome, desktop.firefox ]
+        env: [ iphone.12.pro.max.safari, desktop.chrome, desktop.firefox, desktop.safari, desktop.edge, desktop.ie ]
+        group: [ ui.test.example ]
         include:
-          - os: macos-latest
-            group: ui.test.example
-            env: iphone.12.pro.max.safari
-          - os: macos-latest
-            group: ui.test.example
-            env: desktop.safari
-          - os: windows-latest
-            group: ui.test.example
-            env: desktop.ie
-          - os: windows-latest
-            group: ui.test.example
-            env: desktop.edge
-        exclude:
-          - group: ui.test.example
+          - group: api.test.example
             env: cats.api
+        exclude:
+          - env: iphone.12.pro.max.safari
+            os: windows-latest
+          - env: iphone.12.pro.max.safari
+            os: ubuntu-latest
 
+          - env: desktop.safari
+            os: windows-latest
+          - env: desktop.safari
+            os: ubuntu-latest
+
+          - env: desktop.edge
+            os: ubuntu-latest
+          - env: desktop.edge
+            os: macos-latest
+
+          - env: desktop.ie
+            os: ubuntu-latest
+          - env: desktop.ie
+            os: macos-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
