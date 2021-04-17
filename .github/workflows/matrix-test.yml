@@ -39,7 +39,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Cache node
-        if: ${{ matrix.env == iphone.12.pro.max.safari }}
+        if: ${{ matrix.env == 'iphone.12.pro.max.safari' }}
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -51,17 +51,17 @@ jobs:
         with:
           java-version: 1.8
       - name: Install Appium Server
-        if: ${{ matrix.env == iphone.12.pro.max.safari }}
+        if: ${{ matrix.env == 'iphone.12.pro.max.safari' }}
         run: npm install -g appium
       - name: Run Appium Server
-        if: ${{ matrix.env == iphone.12.pro.max.safari }}
+        if: ${{ matrix.env == 'iphone.12.pro.max.safari' }}
         run: appium -p 4723 --log appium.log &
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Test with Gradle
         run: ./gradlew clean test -Denv="${{ matrix.env }}" -DincludeGroups="${{ matrix.group }}" --info
       - name: Print Appium logs
-        if: ${{ matrix.env == iphone.12.pro.max.safari && steps.Test with Gradle.outcome == success || steps.Test with Gradle.outcome == failure}}
+        if: ${{ matrix.env == 'iphone.12.pro.max.safari' && steps.Test with Gradle.outcome == success || steps.Test with Gradle.outcome == failure}}
         run: cat appium.log
       - name: Download Allure CLI
         if: ${{ always() }}
