@@ -60,7 +60,10 @@ jobs:
       - name: Test with Gradle
         run: ./gradlew clean test -Denv="${{ matrix.env }}" -DincludeGroups="${{ matrix.group }}" --info
       - name: Print Appium logs
-        if: (${{ matrix.env == 'iphone.12.pro.max.safari' }} && ${{ steps.Test with Gradle.outcome == 'success' }} || ${{ steps.Test with Gradle.outcome == 'failure' }})
+        if: |
+          matrix.env == 'iphone.12.pro.max.safari' &&
+          steps.Test with Gradle.outcome == 'success' ||
+          steps.Test with Gradle.outcome == 'failure'
         run: cat appium.log
       - name: Download Allure CLI
         if: ${{ always() }}
