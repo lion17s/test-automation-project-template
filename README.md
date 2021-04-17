@@ -4,7 +4,9 @@
 [![iOS Safari Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/ios-safari-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/ios-safari-test.yml)
 [![Linux API Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-api-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-api-test.yml)
 [![Linux Chrome Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-chrome-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-chrome-test.yml)
-[![Windows Chrome Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-chrome-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-chrome-test.yml)
+[![Linux Firefox Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-firefox-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-firefox-test.yml)
+[![Windows Edge Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-edge-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-edge-test.yml)
+[![Windows IE Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-ie-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-ie-test.yml)
 
 
 ## Description
@@ -42,7 +44,7 @@ env {
     alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android. Default value is false
   }
   iphone.12.pro.max.safari { // custom environment name for storing related properties
-    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, remote. No default value, please set explicitly with using of DrverFactory.setDriver(driverName, capabilities)
+    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, ie, edge, remote. No default value, please set explicitly with using of DrverFactory.setDriver(driverName, capabilities)
     appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
     appium.automationName = XCUITest
     appium.platformName = iOS
