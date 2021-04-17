@@ -16,6 +16,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -95,6 +97,11 @@ public class DriverFactory {
             driver = new FirefoxDriver(firefoxOptions);
             log.debug("firefox driver initialized with options:\n" + firefoxOptions);
             return registerEventFiringDriver(driver);
+        } else if (driverName.equalsIgnoreCase("safari")) {
+            SafariOptions safariOptions = new SafariOptions();
+            capabilities.forEach(safariOptions::setCapability);
+            driver = new SafariDriver(safariOptions);
+            return registerEventFiringDriver(driver);
         } else {
             throw new ExceptionInInitializerError("missing <driver> capability");
         }
@@ -112,7 +119,8 @@ public class DriverFactory {
                 break;
             }
             case "chrome":
-            case "firefox": {
+            case "firefox":
+            case "safari": {
                 driver = initWebDriver(driverName, capabilities);
                 break;
             }
