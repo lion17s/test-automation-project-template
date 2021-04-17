@@ -12,8 +12,12 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -101,6 +105,21 @@ public class DriverFactory {
             SafariOptions safariOptions = new SafariOptions();
             capabilities.forEach(safariOptions::setCapability);
             driver = new SafariDriver(safariOptions);
+            log.debug("safari driver initialized with options:\n" + safariOptions);
+            return registerEventFiringDriver(driver);
+        } else if (driverName.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();
+            EdgeOptions edgeOptions = new EdgeOptions();
+            capabilities.forEach(edgeOptions::setCapability);
+            driver = new EdgeDriver(edgeOptions);
+            log.debug("edge driver initialized with options:\n" + edgeOptions);
+            return registerEventFiringDriver(driver);
+        } else if (driverName.equalsIgnoreCase("ie")) {
+            WebDriverManager.iedriver().setup();
+            InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+            capabilities.forEach(internetExplorerOptions::setCapability);
+            driver = new InternetExplorerDriver(internetExplorerOptions);
+            log.debug("ie driver initialized with options:\n" + internetExplorerOptions);
             return registerEventFiringDriver(driver);
         } else {
             throw new ExceptionInInitializerError("missing <driver> capability");
@@ -120,7 +139,9 @@ public class DriverFactory {
             }
             case "chrome":
             case "firefox":
-            case "safari": {
+            case "safari":
+            case "edge":
+            case "ie": {
                 driver = initWebDriver(driverName, capabilities);
                 break;
             }
