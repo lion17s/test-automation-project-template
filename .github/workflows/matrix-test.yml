@@ -26,17 +26,14 @@ jobs:
             os: windows-latest
           - env: iphone.12.pro.max.safari
             os: ubuntu-latest
-
           - env: desktop.safari
             os: windows-latest
           - env: desktop.safari
             os: ubuntu-latest
-
           - env: desktop.edge
             os: ubuntu-latest
           - env: desktop.edge
             os: macos-latest
-
           - env: desktop.ie
             os: ubuntu-latest
           - env: desktop.ie
