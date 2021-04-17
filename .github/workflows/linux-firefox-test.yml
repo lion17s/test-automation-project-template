@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Windows Chrome Test
+name: Linux Chrome Test
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout source code
@@ -31,14 +31,14 @@ jobs:
         with:
           java-version: 1.8
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew.bat
+        run: chmod +x gradlew
       - name: Test with Gradle
-        run: ./gradlew.bat clean test -Denv="desktop.chrome" -DincludeGroups="ui.test.example" --info
+        run: ./gradlew clean test -Denv=desktop.firefox -DincludeGroups=ui.test.example --info
       - name: Download Allure CLI
         if: ${{ always() }}
-        run: ./gradlew.bat downloadAllure
+        run: ./gradlew downloadAllure
       - name: Generate report
-        run: ./gradlew.bat allureReport
+        run: ./gradlew allureReport
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
