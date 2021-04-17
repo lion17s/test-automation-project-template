@@ -17,31 +17,10 @@ jobs:
       matrix:
         group: [api.test.example, ui.test.example ]
         os: [ macos-latest, windows-latest, ubuntu-latest ]
-        env: [ cats.api, desktop.chrome, desktop.firefox, desktop.edge, desktop.ie ]
-        include:
-          - env: iphone.12.pro.max.safari
-            os: macos-latest
-            group: ui.test.example
-          - env: desktop.safari
-            os: macos-latest
-            group: ui.test.example
+        env: [ cats.api, desktop.chrome, desktop.firefox ]
         exclude:
-          - env: desktop.edge
-            os: macos-latest
-          - env: desktop.edge
-            os: ubuntu-latest
-          - env: desktop.ie
-            os: macos-latest
-          - env: desktop.ie
-            os: ubuntu-latest
-          - group: api.test.example
-            env: desktop.chrome
-          - group: api.test.example
-            env: desktop.firefox
-          - group: api.test.example
-            env: desktop.edge
-          - group: api.test.example
-            env: desktop.ie
+        - group: ui.test.example
+          env: cats.api
 
     steps:
       - name: Checkout source code
