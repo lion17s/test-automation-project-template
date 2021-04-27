@@ -17,6 +17,7 @@ Test-automation project template with ready-to-start developing auto scripts fun
 To start test-automation immediately without spending time on developing of basic functionality
 
 ## Quick start
+Click on "**Use this template**" button or:
 1. Create a folder with your test-automation project name
 2. Clone https://github.com/lion17s/test-automation-project-template.git
 3. Change value of `rootProject.name` in `settings.gradle` file to yours
