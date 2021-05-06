@@ -1,6 +1,6 @@
 package testng;
 
-import com.ta.core.env.Environment;
+import ta.core.env.Environment;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeSuite;
 

@@ -1,4 +1,4 @@
-package com.ta.core.testng.listeners;
+package ta.core.testng.listeners;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;

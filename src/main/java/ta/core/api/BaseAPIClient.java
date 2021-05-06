@@ -1,4 +1,4 @@
-package com.ta.core.api;
+package ta.core.api;
 
 import java.io.File;
 

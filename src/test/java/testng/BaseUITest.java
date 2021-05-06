@@ -1,7 +1,7 @@
 package testng;
 
-import com.ta.core.driver.DriverFactory;
-import com.ta.core.env.Environment;
+import ta.core.driver.DriverFactory;
+import ta.core.env.Environment;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 

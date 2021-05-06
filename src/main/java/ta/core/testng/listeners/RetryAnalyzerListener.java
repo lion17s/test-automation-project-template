@@ -1,6 +1,6 @@
-package com.ta.core.testng.listeners;
+package ta.core.testng.listeners;
 
-import com.ta.core.env.Environment;
+import ta.core.env.Environment;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 

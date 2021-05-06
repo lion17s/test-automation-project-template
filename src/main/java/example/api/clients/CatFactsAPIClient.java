@@ -1,6 +1,6 @@
 package example.api.clients;
 
-import com.ta.core.api.BaseAPIClient;
+import ta.core.api.BaseAPIClient;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 

@@ -1,7 +1,7 @@
 package testng;
 
-import com.ta.core.env.Environment;
-import com.ta.core.testng.listeners.TestListener;
+import ta.core.env.Environment;
+import ta.core.testng.listeners.TestListener;
 import org.testng.annotations.*;
 
 @Listeners(TestListener.class)

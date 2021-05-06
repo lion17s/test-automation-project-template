@@ -1,7 +1,7 @@
-package com.ta.core.ui;
+package ta.core.ui;
 
-import com.ta.core.driver.DriverFactory;
-import com.ta.core.env.Environment;
+import ta.core.driver.DriverFactory;
+import ta.core.env.Environment;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;

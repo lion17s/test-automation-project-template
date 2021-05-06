@@ -1,8 +1,8 @@
-package com.ta.core.testng.listeners;
+package ta.core.testng.listeners;
 
-import com.ta.core.driver.DriverFactory;
-import com.ta.core.env.Environment;
-import com.ta.core.reporting.allure.ReportingHelper;
+import ta.core.driver.DriverFactory;
+import ta.core.env.Environment;
+import ta.core.reporting.allure.ReportingHelper;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.config.ObjectMapperConfig;

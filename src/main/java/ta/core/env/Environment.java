@@ -1,4 +1,4 @@
-package com.ta.core.env;
+package ta.core.env;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

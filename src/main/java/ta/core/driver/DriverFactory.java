@@ -1,6 +1,6 @@
-package com.ta.core.driver;
+package ta.core.driver;
 
-import com.ta.core.testng.listeners.DriverEventListener;
+import ta.core.testng.listeners.DriverEventListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
