@@ -75,5 +75,5 @@ env {
 6. Page Object Pattern is suggested to use. Refer to [`BaseUITest.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/BaseUITest.java) class on driver control examples, [`GoogleSearchPage.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/example/ui/pages/GoogleSearchPage.java) on page object example and [`ExampleUITests.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/example/ExampleUITests.java) for test example.
 
 * ### API testing
-1. Use `setResponse()` method and define request as a parameter. Use `getResponse()` to get response.
+1. Use `setResponse(requestSpecification)` method and define request as a parameter. Use `getResponse()` to get response.
 2. "Client" Object Pattern(same idea as for Page Object Pattern) suggested to use. Please refer to [`CatFactsAPIClient.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/main/java/example/api/clients/CatFactsAPIClient.java), [`BaseAPITest.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/BaseAPITest.java) and [`ExampleAPITests.java`](https://github.com/lion17s/test-automation-project-template/blob/main/src/test/java/testng/example/ExampleAPITests.java) for examples.
