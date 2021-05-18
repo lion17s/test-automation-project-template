@@ -96,11 +96,11 @@ dependencies {
     // test reporting libs
     // https://mvnrepository.com/artifact/io.qameta.allure/allure-testng
     implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.+'
-    // https://mvnrepository.com/artifact/org.freemarker/freemarker
-    implementation group: 'org.freemarker', name: 'freemarker', version: '2.+'
-    // https://mvnrepository.com/artifact/org.apache.tika/tika-core
-    implementation group: 'org.apache.tika', name: 'tika-core', version: '1.+'
-    // https://mvnrepository.com/artifact/org.jooq/joor-java-8
-    implementation group: 'org.jooq', name: 'joor-java-8', version: '0.9.+'
+//    // https://mvnrepository.com/artifact/org.freemarker/freemarker
+//    implementation group: 'org.freemarker', name: 'freemarker', version: '2.+'
+//    // https://mvnrepository.com/artifact/org.apache.tika/tika-core
+//    implementation group: 'org.apache.tika', name: 'tika-core', version: '1.+'
+//    // https://mvnrepository.com/artifact/org.jooq/joor-java-8
+//    implementation group: 'org.jooq', name: 'joor-java-8', version: '0.9.+'
 
 }
