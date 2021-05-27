@@ -27,7 +27,8 @@ allure {
     autoconfigure = true
 }
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 gradle.startParameter.continueOnFailure = true
 
 test {
