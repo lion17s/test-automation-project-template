@@ -7,8 +7,6 @@
 [![Linux Chrome Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-chrome-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-chrome-test.yml)
 [![Linux Firefox Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-firefox-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/linux-firefox-test.yml)
 [![Windows Edge Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-edge-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-edge-test.yml)
-[![Windows IE Test](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-ie-test.yml/badge.svg?branch=main)](https://github.com/lion17s/test-automation-project-template/actions/workflows/windows-ie-test.yml)
-
 
 ## Description
 Test-automation project template with ready-to-start developing auto scripts functionality to test WEB UI, Rest-API, Mobile(iOS, Android). NOT another "wrapper-test-automation-framework", just a "minimal facade" for popular open-source instruments: TestNG, Selenium, REST-assured, Allure. Extend/modify it in a way required to match your test-automation needs
@@ -46,7 +44,7 @@ env {
     alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android. Default value is false
   }
   iphone.12.pro.max.safari { // custom environment name for storing related properties
-    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, ie, edge, remote. No default value, please set explicitly with using of DrverFactory.setDriver(driverName, capabilities)
+    driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, edge, remote. No default value, please set explicitly with using of DrverFactory.setDriver(driverName, capabilities)
     appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
     appium.automationName = XCUITest
     appium.platformName = iOS

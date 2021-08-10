@@ -15,8 +15,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -113,13 +111,6 @@ public class DriverFactory {
             driver = new EdgeDriver(edgeOptions);
             log.debug("edge driver initialized with options:\n{}", edgeOptions);
             return registerEventFiringDriver(driver);
-        } else if (driverName.equalsIgnoreCase("ie")) {
-            WebDriverManager.iedriver().setup();
-            var internetExplorerOptions = new InternetExplorerOptions();
-            capabilities.forEach(internetExplorerOptions::setCapability);
-            driver = new InternetExplorerDriver(internetExplorerOptions);
-            log.debug("ie driver initialized with options:\n{}", internetExplorerOptions);
-            return registerEventFiringDriver(driver);
         } else {
             throw new ExceptionInInitializerError("missing <driver> capability");
         }
@@ -139,8 +130,7 @@ public class DriverFactory {
             case "chrome":
             case "firefox":
             case "safari":
-            case "edge":
-            case "ie": {
+            case "edge": {
                 driver = initWebDriver(driverName, capabilities);
                 break;
             }
