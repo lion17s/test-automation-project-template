@@ -60,11 +60,11 @@ public class DriverFactory {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities(capabilities);
         if (platformName.equalsIgnoreCase(Platform.ANDROID.name())) {
             AndroidDriver<MobileElement> androidDriver = new AndroidDriver<>(url, desiredCapabilities);
-            log.debug("appium android driver initialized with capabilities: " + url + "\n" + desiredCapabilities);
+            log.debug("appium android driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
             return androidDriver;
         } else if (platformName.equalsIgnoreCase(Platform.IOS.name())) {
             IOSDriver<MobileElement> iosDriver = new IOSDriver<>(url, desiredCapabilities);
-            log.debug("appium ios driver initialized with capabilities: " + url + "\n" + desiredCapabilities);
+            log.debug("appium ios driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
             return iosDriver;
         } else {
             throw new ExceptionInInitializerError("missing <platformName> capability");
@@ -75,7 +75,7 @@ public class DriverFactory {
         if (!getURLFromCapabilities(capabilities).toString().isEmpty()) {
             URL url = getURLFromCapabilities(capabilities);
             WebDriver remoteWebDriver = new RemoteWebDriver(url, new DesiredCapabilities(capabilities));
-            log.debug("remote web driver initialized with capabilities: " + url + "\n" + capabilities);
+            log.debug("remote web driver initialized with capabilities: {}\n{}", url, capabilities);
             return registerEventFiringDriver(remoteWebDriver);
         } else {
             throw new ExceptionInInitializerError("missing <hub> capability");
@@ -91,7 +91,7 @@ public class DriverFactory {
             capabilities.forEach(chromeOptions::setCapability);
             chromeOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
             driver = new ChromeDriver(chromeOptions);
-            log.debug("chrome driver initialized with options:\n" + chromeOptions);
+            log.debug("chrome driver initialized with options:\n{}", chromeOptions);
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
@@ -99,27 +99,27 @@ public class DriverFactory {
             capabilities.forEach(firefoxOptions::setCapability);
             firefoxOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
             driver = new FirefoxDriver(firefoxOptions);
-            log.debug("firefox driver initialized with options:\n" + firefoxOptions);
+            log.debug("firefox driver initialized with options:\n{}", firefoxOptions);
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("safari")) {
             SafariOptions safariOptions = new SafariOptions();
             capabilities.forEach(safariOptions::setCapability);
             driver = new SafariDriver(safariOptions);
-            log.debug("safari driver initialized with options:\n" + safariOptions);
+            log.debug("safari driver initialized with options:\n{}", safariOptions);
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             EdgeOptions edgeOptions = new EdgeOptions();
             capabilities.forEach(edgeOptions::setCapability);
             driver = new EdgeDriver(edgeOptions);
-            log.debug("edge driver initialized with options:\n" + edgeOptions);
+            log.debug("edge driver initialized with options:\n{}", edgeOptions);
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("ie")) {
             WebDriverManager.iedriver().setup();
             InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
             capabilities.forEach(internetExplorerOptions::setCapability);
             driver = new InternetExplorerDriver(internetExplorerOptions);
-            log.debug("ie driver initialized with options:\n" + internetExplorerOptions);
+            log.debug("ie driver initialized with options:\n{}", internetExplorerOptions);
             return registerEventFiringDriver(driver);
         } else {
             throw new ExceptionInInitializerError("missing <driver> capability");

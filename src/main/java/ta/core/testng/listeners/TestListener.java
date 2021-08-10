@@ -42,7 +42,7 @@ public class TestListener extends XMLReporter
 
     @Override
     public void onStart(ISuite suite) {
-        log.info(suite.getName() + " execution started");
+        log.info("{} execution started", suite.getName());
         super.getConfig().setGenerateTestResultAttributes(true);
         RestAssured.config = RestAssuredConfig.config().objectMapperConfig(new ObjectMapperConfig(GSON));
         RestAssured.filters(new AllureRestAssured());
@@ -53,7 +53,7 @@ public class TestListener extends XMLReporter
 
     @Override
     public void onTestStart(ITestResult result) {
-        log.info(result.getMethod().getMethodName() + " STARTED");
+        log.info("{} STARTED", result.getMethod().getMethodName());
         if (DriverFactory.getDriver() != null) {
             capabilities = ((HasCapabilities) DriverFactory.getDriver()).getCapabilities().asMap();
             shouldAlwaysAttachScreenshot = Environment.getValueOrDefault("alwaysAttachScreenshot", false);
@@ -66,7 +66,7 @@ public class TestListener extends XMLReporter
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        log.info(result.getMethod().getMethodName() + " PASSED");
+        log.info("{} PASSED", result.getMethod().getMethodName());
         ReportingHelper
                 .attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), shouldAlwaysAttachScreenshot);
         ReportingHelper
@@ -75,7 +75,7 @@ public class TestListener extends XMLReporter
 
     @Override
     public void onTestFailure(ITestResult result) {
-        log.info(result.getMethod().getMethodName() + " FAILED");
+        log.info("{} FAILED", result.getMethod().getMethodName());
         ReportingHelper
                 .attachScreenshot(DriverFactory.getDriver(), "screenshot-" + UUID.randomUUID(), shouldAttachScreenshot);
         ReportingHelper
@@ -84,7 +84,7 @@ public class TestListener extends XMLReporter
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        log.info(result.getMethod().getMethodName() + " SKIPPED");
+        log.info("{} SKIPPED", result.getMethod().getMethodName());
     }
 
     @Override
@@ -95,7 +95,7 @@ public class TestListener extends XMLReporter
     @Override
     public void onFinish(ISuite suite) {
         ReportingHelper.attachEnvironmentInfo(capabilities);
-        log.info(suite.getName() + " execution finished");
+        log.info("{} execution finished", suite.getName());
     }
 
 }

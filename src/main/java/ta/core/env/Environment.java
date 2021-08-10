@@ -21,7 +21,7 @@ public class Environment {
             throw new ExceptionInInitializerError(
                     "please choose environment name from src/test/resources/environment.conf file");
         } else {
-            log.debug("getting configs from <" + environment + ">");
+            log.debug("getting configs from <{}>", environment);
             Config config = ConfigFactory.parseFile(new File("src/test/resources/environment.conf"));
             Config defaultEnv = config.getConfig("env.default");
             return config.getConfig("env." + environment).withFallback(defaultEnv);
@@ -30,13 +30,13 @@ public class Environment {
 
     @SuppressWarnings("unchecked")
     public static <T> T getValueOrDefault(String path, T defaultValue) {
-        log.debug("getting value by path <" + path + ">");
+        log.debug("getting value by path <{}>", path);
         if (Environment.get().hasPath(path)) {
             T value = (T) Environment.get().getAnyRef(path);
-            log.debug("<" + path + "> value is: <" + value.toString() + ">");
+            log.debug("<{}> value is: <{}>", path, value);
             return value;
         } else {
-            log.debug("cannot find path <" + path + "> returning default value: <" + defaultValue.toString() + ">");
+            log.debug("cannot find path <{}> returning default value: <{}>", path, defaultValue);
             return defaultValue;
         }
     }

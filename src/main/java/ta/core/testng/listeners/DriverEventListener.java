@@ -32,12 +32,12 @@ public class DriverEventListener implements WebDriverEventListener {
 
     @Override
     public void beforeNavigateTo(String s, WebDriver webDriver) {
-        log.debug("navigating to " + s);
+        log.debug("navigating to {}", s);
     }
 
     @Override
     public void afterNavigateTo(String s, WebDriver webDriver) {
-        log.debug("navigated to " + s);
+        log.debug("navigated to {}", s);
     }
 
     @Override
@@ -72,52 +72,52 @@ public class DriverEventListener implements WebDriverEventListener {
 
     @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-        log.debug("getting element " + by.toString());
+        log.debug("getting element {}", by);
     }
 
     @Override
     public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
-        log.debug("element gotten " + by.toString());
+        log.debug("element gotten {}", by);
     }
 
     @Override
     public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
-        log.debug("clicking on element " + webElement.toString());
+        log.debug("clicking on element {}", webElement);
     }
 
     @Override
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-        log.debug("clicked on element " + webElement.toString());
+        log.debug("clicked on element {}", webElement);
     }
 
     @Override
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences) {
-        log.debug("changing value of element " + webElement.toString());
+        log.debug("changing value of element {}", webElement);
     }
 
     @Override
     public void afterChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences) {
-        log.debug("changed value of element " + webElement.toString());
+        log.debug("changed value of element {}", webElement);
     }
 
     @Override
     public void beforeScript(String s, WebDriver webDriver) {
-        log.debug("executing script \n" + s);
+        log.debug("executing script \n{}", s);
     }
 
     @Override
     public void afterScript(String s, WebDriver webDriver) {
-        log.debug("script executed \n" + s);
+        log.debug("script executed \n{}", s);
     }
 
     @Override
     public void beforeSwitchToWindow(String s, WebDriver webDriver) {
-        log.debug("switching to window " + s);
+        log.debug("switching to window {}", s);
     }
 
     @Override
     public void afterSwitchToWindow(String s, WebDriver webDriver) {
-        log.debug("switched to window " + s);
+        log.debug("switched to window {}", s);
     }
 
     @Override
@@ -137,12 +137,12 @@ public class DriverEventListener implements WebDriverEventListener {
 
     @Override
     public void beforeGetText(WebElement webElement, WebDriver webDriver) {
-        log.debug("getting text from element " + webElement.toString());
+        log.debug("getting text from element {}", webElement);
     }
 
     @Override
     public void afterGetText(WebElement webElement, WebDriver webDriver, String s) {
-        log.debug("text gotten <" + s + "> from element " + webElement.toString());
+        log.debug("text gotten <{}> from element {}", s, webElement);
     }
 
 }

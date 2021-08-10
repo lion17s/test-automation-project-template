@@ -65,7 +65,7 @@ public class ReportingHelper {
     @SneakyThrows
     public static void attachEnvironmentInfo(Map<String, Object> capabilities) {
         if (capabilities != null) {
-            log.debug("attaching environment info from capabilities \n" + capabilities);
+            log.debug("attaching environment info from capabilities \n{}", capabilities);
             OutputStream output = new FileOutputStream("build/allure-results/environment.properties");
             Properties properties = new Properties();
             capabilities.forEach((key, value) -> properties.setProperty(key, value.toString()));
