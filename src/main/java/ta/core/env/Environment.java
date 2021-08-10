@@ -22,8 +22,8 @@ public class Environment {
                     "please choose environment name from src/test/resources/environment.conf file");
         } else {
             log.debug("getting configs from <{}>", environment);
-            Config config = ConfigFactory.parseFile(new File("src/test/resources/environment.conf"));
-            Config defaultEnv = config.getConfig("env.default");
+            var config = ConfigFactory.parseFile(new File("src/test/resources/environment.conf"));
+            var defaultEnv = config.getConfig("env.default");
             return config.getConfig("env." + environment).withFallback(defaultEnv);
         }
     }

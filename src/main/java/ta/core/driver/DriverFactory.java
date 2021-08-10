@@ -46,8 +46,8 @@ public class DriverFactory {
 
     private static EventFiringWebDriver registerEventFiringDriver(WebDriver driver) {
         log.debug("registering firing event driver");
-        EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
-        DriverEventListener driverEventListener = new DriverEventListener();
+        var eventFiringWebDriver = new EventFiringWebDriver(driver);
+        var driverEventListener = new DriverEventListener();
         eventFiringWebDriver.register(driverEventListener);
         log.debug("event firing driver registered");
         return eventFiringWebDriver;
@@ -55,15 +55,15 @@ public class DriverFactory {
 
     private static AppiumDriver<?> initAppiumDriver(Map<String, Object> capabilities) {
         log.debug("initializing appium driver");
-        URL url = getURLFromCapabilities(capabilities);
-        String platformName = getPlatformNameFromCapabilities(capabilities);
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities(capabilities);
+        var url = getURLFromCapabilities(capabilities);
+        var platformName = getPlatformNameFromCapabilities(capabilities);
+        var desiredCapabilities = new DesiredCapabilities(capabilities);
         if (platformName.equalsIgnoreCase(Platform.ANDROID.name())) {
-            AndroidDriver<MobileElement> androidDriver = new AndroidDriver<>(url, desiredCapabilities);
+            var androidDriver = new AndroidDriver<>(url, desiredCapabilities);
             log.debug("appium android driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
             return androidDriver;
         } else if (platformName.equalsIgnoreCase(Platform.IOS.name())) {
-            IOSDriver<MobileElement> iosDriver = new IOSDriver<>(url, desiredCapabilities);
+            var iosDriver = new IOSDriver<>(url, desiredCapabilities);
             log.debug("appium ios driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
             return iosDriver;
         } else {
@@ -73,8 +73,8 @@ public class DriverFactory {
 
     private static WebDriver initRemoteWebDriver(Map<String, Object> capabilities) {
         if (!getURLFromCapabilities(capabilities).toString().isEmpty()) {
-            URL url = getURLFromCapabilities(capabilities);
-            WebDriver remoteWebDriver = new RemoteWebDriver(url, new DesiredCapabilities(capabilities));
+            var url = getURLFromCapabilities(capabilities);
+            var remoteWebDriver = new RemoteWebDriver(url, new DesiredCapabilities(capabilities));
             log.debug("remote web driver initialized with capabilities: {}\n{}", url, capabilities);
             return registerEventFiringDriver(remoteWebDriver);
         } else {
@@ -87,7 +87,7 @@ public class DriverFactory {
         WebDriver driver;
         if (driverName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
-            ChromeOptions chromeOptions = new ChromeOptions();
+            var chromeOptions = new ChromeOptions();
             capabilities.forEach(chromeOptions::setCapability);
             chromeOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
             driver = new ChromeDriver(chromeOptions);
@@ -95,28 +95,28 @@ public class DriverFactory {
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            var firefoxOptions = new FirefoxOptions();
             capabilities.forEach(firefoxOptions::setCapability);
             firefoxOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
             driver = new FirefoxDriver(firefoxOptions);
             log.debug("firefox driver initialized with options:\n{}", firefoxOptions);
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("safari")) {
-            SafariOptions safariOptions = new SafariOptions();
+            var safariOptions = new SafariOptions();
             capabilities.forEach(safariOptions::setCapability);
             driver = new SafariDriver(safariOptions);
             log.debug("safari driver initialized with options:\n{}", safariOptions);
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
-            EdgeOptions edgeOptions = new EdgeOptions();
+            var edgeOptions = new EdgeOptions();
             capabilities.forEach(edgeOptions::setCapability);
             driver = new EdgeDriver(edgeOptions);
             log.debug("edge driver initialized with options:\n{}", edgeOptions);
             return registerEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("ie")) {
             WebDriverManager.iedriver().setup();
-            InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+            var internetExplorerOptions = new InternetExplorerOptions();
             capabilities.forEach(internetExplorerOptions::setCapability);
             driver = new InternetExplorerDriver(internetExplorerOptions);
             log.debug("ie driver initialized with options:\n{}", internetExplorerOptions);

@@ -46,7 +46,7 @@ public class ReportingHelper {
 
     public static void attachVideo(WebDriver driver, String name, boolean shouldAttach) {
         if (shouldAttach) {
-            String output = stopRecordingScreen(driver);
+            var output = stopRecordingScreen(driver);
             log.debug("attaching video");
             Allure.addAttachment(name, new ByteArrayInputStream(Base64.decodeBase64(output)));
             log.debug("video attached");
@@ -55,7 +55,7 @@ public class ReportingHelper {
 
     public static void attachScreenshot(WebDriver driver, String name, boolean shouldAttach) {
         if (driver != null && shouldAttach) {
-            byte[] screenshotByteArray = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            var screenshotByteArray = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             log.debug("attaching screenshot");
             Allure.addAttachment(name, new ByteArrayInputStream(screenshotByteArray));
             log.debug("screenshot attached");
@@ -66,8 +66,8 @@ public class ReportingHelper {
     public static void attachEnvironmentInfo(Map<String, Object> capabilities) {
         if (capabilities != null) {
             log.debug("attaching environment info from capabilities \n{}", capabilities);
-            OutputStream output = new FileOutputStream("build/allure-results/environment.properties");
-            Properties properties = new Properties();
+            var output = new FileOutputStream("build/allure-results/environment.properties");
+            var properties = new Properties();
             capabilities.forEach((key, value) -> properties.setProperty(key, value.toString()));
             properties.store(output, "Environment info");
             log.debug("environment info attached");

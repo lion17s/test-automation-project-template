@@ -40,7 +40,7 @@ public abstract class BaseAPIClient<T extends BaseAPIClient<T>> {
 
     @Step
     public T verifyBodyMatchesJsonSchema(File expectedJsonSchema) {
-        JsonSchemaFactory jsonSchemaFactory = JsonSchemaFactory.newBuilder()
+        var jsonSchemaFactory = JsonSchemaFactory.newBuilder()
                 .setValidationConfiguration(
                         ValidationConfiguration.newBuilder()
                                 .setDefaultVersion(SchemaVersion.DRAFTV4)
