@@ -2,7 +2,6 @@ package ta.core.driver;
 
 import ta.core.testng.listeners.DriverEventListener;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
