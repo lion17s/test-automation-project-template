@@ -6,11 +6,9 @@ import io.restassured.RestAssured;
 
 public class CatFactsAPIClient extends BaseAPIClient<CatFactsAPIClient> {
 
-    private static final String BASE_PATH = "/facts";
-
     @Step
     public CatFactsAPIClient getRandomFact() {
-        setResponse(RestAssured.given().basePath(BASE_PATH).get("/random"));
+        setResponse(RestAssured.get("/fact"));
         return this;
     }
 
