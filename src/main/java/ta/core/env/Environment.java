@@ -2,7 +2,6 @@ package ta.core.env;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
@@ -12,10 +11,10 @@ import java.io.File;
 public class Environment {
 
     @Setter
-    @Getter
     private static String environment;
+    private static Config currentConfig;
 
-    public static Config get() {
+    private Environment() {
         if (environment.isEmpty()) {
             log.debug("environment name is empty");
             throw new ExceptionInInitializerError(
@@ -24,21 +23,30 @@ public class Environment {
             log.debug("getting configs from <{}>", environment);
             var config = ConfigFactory.parseFile(new File("src/test/resources/environment.conf"));
             var defaultEnv = config.getConfig("env.default");
-            return config.getConfig("env." + environment).withFallback(defaultEnv);
+            currentConfig = config.getConfig("env." + environment).withFallback(defaultEnv);
         }
     }
 
+    public static Environment getCurrentEnvironment() {
+        return new Environment();
+    }
+
     @SuppressWarnings("unchecked")
-    public static <T> T getValueOrDefault(String path, T defaultValue) {
+    public <T> T getOrDefault(String path, T defaultValue) {
         log.debug("getting value by path <{}>", path);
-        if (Environment.get().hasPath(path)) {
-            T value = (T) Environment.get().getAnyRef(path);
+        if (currentConfig.hasPath(path)) {
+            T value = (T) currentConfig.getAnyRef(path);
             log.debug("<{}> value is: <{}>", path, value);
             return value;
         } else {
             log.debug("cannot find path <{}> returning default value: <{}>", path, defaultValue);
             return defaultValue;
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T get(String path) {
+        return (T) currentConfig.getAnyRef(path);
     }
 
 }

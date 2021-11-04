@@ -8,7 +8,7 @@ public abstract class BaseAPITest extends BaseTest {
 
     @BeforeSuite(groups = "api.test.example", dependsOnMethods = "setupEnvironment")
     public void setupAPIClientEnvironment() {
-        RestAssured.baseURI = Environment.get().getString("base.uri");
+        RestAssured.baseURI = Environment.getCurrentEnvironment().get("base.uri");
     }
 
 }

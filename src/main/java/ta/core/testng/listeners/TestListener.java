@@ -56,10 +56,10 @@ public class TestListener extends XMLReporter
         log.info("{} STARTED", result.getMethod().getMethodName());
         if (DriverFactory.getDriver() != null) {
             capabilities = ((HasCapabilities) DriverFactory.getDriver()).getCapabilities().asMap();
-            shouldAlwaysAttachScreenshot = Environment.getValueOrDefault("alwaysAttachScreenshot", false);
-            shouldAlwaysAttachVideo = Environment.getValueOrDefault("alwaysAttachVideo", false);
-            shouldAttachScreenshot = Environment.getValueOrDefault("attachScreenshot", shouldAlwaysAttachScreenshot);
-            shouldAttachVideo = Environment.getValueOrDefault("attachVideo", shouldAlwaysAttachVideo);
+            shouldAlwaysAttachScreenshot = Environment.getCurrentEnvironment().getOrDefault("alwaysAttachScreenshot", false);
+            shouldAlwaysAttachVideo = Environment.getCurrentEnvironment().getOrDefault("alwaysAttachVideo", false);
+            shouldAttachScreenshot = Environment.getCurrentEnvironment().getOrDefault("attachScreenshot", shouldAlwaysAttachScreenshot);
+            shouldAttachVideo = Environment.getCurrentEnvironment().getOrDefault("attachVideo", shouldAlwaysAttachVideo);
         }
         ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), shouldAttachVideo);
     }
