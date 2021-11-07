@@ -48,7 +48,7 @@ jobs:
       - name: Get available simulators
         run: xcrun simctl list
       - name: Test with Gradle
-        run: ./gradlew clean test -Denv=iphone.12.safari -DincludeGroups=ui.test.example --info
+        run: ./gradlew clean test -Denv=iphone.12.safari.simulator -DincludeGroups=ui.test.example --info
       - name: Print Appium logs
         if: ${{ always() }}
         run: cat appium.log

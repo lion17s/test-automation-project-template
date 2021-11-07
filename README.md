@@ -43,13 +43,13 @@ env {
     attachVideo = true // used to control attaching video on test failure. Works for iOS, Android. Default value is false
     alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android. Default value is false
   }
-  iphone.12.safari { // custom environment name for storing related properties
+  iphone.12.safari.simulator { // custom environment name for storing related properties
     driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, edge, remote. No default value, please set explicitly with using of DrverFactory.setDriver(driverName, capabilities)
     appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
     appium.automationName = XCUITest
     appium.platformName = iOS
     appium.platformVersion = "14.4"
-    appium.deviceName = iPhone 12 Pro Max
+    appium.deviceName = iPhone 12
     appium.browserName = Safari
     appium.isHeadless = true
   }
