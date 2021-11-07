@@ -43,7 +43,7 @@ env {
     attachVideo = true // used to control attaching video on test failure. Works for iOS, Android. Default value is false
     alwaysAttachVideo = false // used to control attaching video after test finishes. Works for iOS, Android. Default value is false
   }
-  iphone.12.pro.max.safari { // custom environment name for storing related properties
+  iphone.12.safari { // custom environment name for storing related properties
     driver = appium // used to set driver to be initilized. Available values: appium, chrome, firefox, edge, remote. No default value, please set explicitly with using of DrverFactory.setDriver(driverName, capabilities)
     appium.hub = "http://localhost:4723/wd/hub" // <driver_name>.<capability_name> - put driver's available capabilities. Capabilities are listed in driver's docs
     appium.automationName = XCUITest
@@ -58,7 +58,7 @@ env {
     chrome.arguments = [--headless] // <driver_name>.arguments - used for storing driver cli arguments. Current value is an array as per chromedriver requirements
   }
   cats.api {
-    base.uri = "https://cat-fact.herokuapp.com" // custom property
+    base.uri = "https://catfact.ninja" // custom property
   }
 
 }
