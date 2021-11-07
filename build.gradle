@@ -64,8 +64,8 @@ dependencies {
 
     // boilerplate code processor libs
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly 'org.projectlombok:lombok:1.+'
-    annotationProcessor 'org.projectlombok:lombok:1.+'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     // testing libs
     // https://mvnrepository.com/artifact/org.testng/testng
@@ -73,7 +73,7 @@ dependencies {
 
     // ui testing libs
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.+'
     // https://mvnrepository.com/artifact/io.appium/java-client
     implementation group: 'io.appium', name: 'java-client', version: '7.+'
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
