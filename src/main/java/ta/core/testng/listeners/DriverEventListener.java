@@ -1,10 +1,7 @@
 package ta.core.testng.listeners;
 
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
 @Log4j2
@@ -48,6 +45,7 @@ public class DriverEventListener implements WebDriverEventListener {
     @Override
     public void afterNavigateBack(WebDriver webDriver) {
         log.debug("navigated back");
+
     }
 
     @Override
@@ -138,6 +136,7 @@ public class DriverEventListener implements WebDriverEventListener {
     @Override
     public void beforeGetText(WebElement webElement, WebDriver webDriver) {
         log.debug("getting text from element {}", webElement);
+
     }
 
     @Override
