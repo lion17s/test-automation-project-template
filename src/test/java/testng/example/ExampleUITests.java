@@ -1,6 +1,5 @@
 package testng.example;
 
-import example.ui.pages.MixCloudPage;
 import org.testng.annotations.Test;
 import testng.BaseUITest;
 
