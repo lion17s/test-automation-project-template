@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ main ]
 
+  schedule:
+    # Runs "at minute 55 past every hour"
+    - cron: '55 * * * *'
+
 jobs:
   build:
 
