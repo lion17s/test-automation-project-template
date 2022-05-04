@@ -4,6 +4,7 @@ import ta.core.env.Environment;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
+@SuppressWarnings("unused")
 public class RetryAnalyzerListener implements IRetryAnalyzer {
 
     private int counter = 0;
