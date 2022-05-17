@@ -4,8 +4,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-
-import java.io.File;
+import ta.core.utils.FileUtil;
 
 @Log4j2
 public class Environment {
@@ -18,10 +17,11 @@ public class Environment {
         if (environment.isEmpty()) {
             log.debug("environment name is empty");
             throw new ExceptionInInitializerError(
-                    "please choose environment name from src/test/resources/environment.conf file");
+                    "please choose environment name from environment.conf file");
         } else {
             log.debug("getting configs from <{}>", environment);
-            var config = ConfigFactory.parseFile(new File("src/test/resources/environment.conf"));
+            var configFile = FileUtil.findFile("environment", "conf");
+            var config = ConfigFactory.parseFile(configFile);
             var defaultEnv = config.getConfig("env.default");
             currentConfig = config.getConfig("env." + environment).withFallback(defaultEnv);
         }
