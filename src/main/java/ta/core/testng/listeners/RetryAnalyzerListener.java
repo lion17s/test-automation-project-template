@@ -8,7 +8,7 @@ import org.testng.ITestResult;
 public class RetryAnalyzerListener implements IRetryAnalyzer {
 
     private int counter = 0;
-    private static final int RETRY_LIMIT = Environment.getCurrentEnvironment().getOrDefault("retryOnFail", 0);
+    private static final int RETRY_LIMIT = Environment.getOrDefault("retryOnFail", 0);
 
     @Override
     public boolean retry(ITestResult result) {

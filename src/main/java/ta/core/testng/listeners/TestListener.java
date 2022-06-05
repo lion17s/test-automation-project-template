@@ -41,13 +41,13 @@ public class TestListener extends XMLReporter implements IReporter, ITestListene
         log.info("{} STARTED", result.getMethod().getMethodName());
         if (DriverFactory.getDriver() != null) {
             capabilities = ((HasCapabilities) DriverFactory.getDriver()).getCapabilities().asMap();
-            shouldAlwaysAttachScreenshot = Environment.getCurrentEnvironment()
+            shouldAlwaysAttachScreenshot = Environment
                     .getOrDefault("alwaysAttachScreenshot", false);
-            shouldAlwaysAttachVideo = Environment.getCurrentEnvironment()
+            shouldAlwaysAttachVideo = Environment
                     .getOrDefault("alwaysAttachVideo", false);
-            shouldAttachScreenshot = Environment.getCurrentEnvironment()
+            shouldAttachScreenshot = Environment
                     .getOrDefault("attachScreenshot", shouldAlwaysAttachScreenshot);
-            shouldAttachVideo = Environment.getCurrentEnvironment()
+            shouldAttachVideo = Environment
                     .getOrDefault("attachVideo", shouldAlwaysAttachVideo);
         }
         ReportingHelper.startRecordingScreen(DriverFactory.getDriver(), shouldAttachVideo);

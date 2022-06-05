@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public abstract class BaseUIElement {
 
-    private static final int WAIT_TIME_SECONDS = Environment.getCurrentEnvironment().getOrDefault("driverWait", 3);
+    private static final int WAIT_TIME_SECONDS = Environment.getOrDefault("driverWait", 3);
 
     public BaseUIElement() {
         if (DriverFactory.getDriver() instanceof AppiumDriver) {

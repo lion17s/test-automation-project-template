@@ -12,8 +12,8 @@ public abstract class BaseUITest extends BaseTest {
 
     @BeforeMethod(groups = "ui.test.example")
     public void setupDriver() {
-        String driver = Environment.getCurrentEnvironment().get("driver");
-        Map<String, Object> capabilities = Environment.getCurrentEnvironment().getOrDefault(driver, new HashMap<>());
+        String driver = Environment.get("driver");
+        Map<String, Object> capabilities = Environment.getOrDefault(driver, new HashMap<>());
         DriverFactory.setDriver(driver, capabilities);
 
     }
