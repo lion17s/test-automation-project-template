@@ -33,12 +33,18 @@ public class DriverFactory {
     private static final ThreadLocal<WebDriver> DRIVER_INSTANCE = new ThreadLocal<>();
 
     private static String getPlatformNameFromCapabilities(Map<String, Object> capabilities) {
-        return capabilities.getOrDefault("platformName", "").toString();
+        log.debug("getting <platformName> capability");
+        var platformName = capabilities.getOrDefault("platformName", "").toString();
+        log.debug("gotten <platformName>: {}", platformName);
+        return platformName;
     }
 
     @SneakyThrows
     private static URL getURLFromCapabilities(Map<String, Object> capabilities) {
-        return new URL(capabilities.getOrDefault("hub", "").toString());
+        log.debug("getting <URL> from capabilities");
+        var url = new URL(capabilities.getOrDefault("hub", "").toString());
+        log.debug("gotten <URL>: {}", url);
+        return url;
     }
 
     private static EventFiringWebDriver registerEventFiringDriver(WebDriver driver) {
