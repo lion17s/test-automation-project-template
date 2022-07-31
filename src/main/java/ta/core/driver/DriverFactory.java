@@ -1,12 +1,12 @@
 package ta.core.driver;
 
+import lombok.extern.slf4j.Slf4j;
 import ta.core.testng.listeners.DriverEventListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 
-@Log4j2
+@Slf4j
 @SuppressWarnings("unused")
 public class DriverFactory {
 

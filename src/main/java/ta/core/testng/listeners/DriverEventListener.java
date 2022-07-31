@@ -1,10 +1,10 @@
 package ta.core.testng.listeners;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-@Log4j2
+@Slf4j
 public class DriverEventListener implements WebDriverEventListener {
 
     @Override

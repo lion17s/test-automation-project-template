@@ -2,10 +2,10 @@ package ta.core.env;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import ta.core.utils.FileUtil;
 
-@Log4j2
+@Slf4j
 public class Environment {
 
     private static final ThreadLocal<String> ENVIRONMENT = new ThreadLocal<>();

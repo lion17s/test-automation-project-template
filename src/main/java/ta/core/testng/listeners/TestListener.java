@@ -1,5 +1,6 @@
 package ta.core.testng.listeners;
 
+import lombok.extern.slf4j.Slf4j;
 import ta.core.driver.DriverFactory;
 import ta.core.env.Environment;
 import ta.core.reporting.allure.ReportingHelper;
@@ -7,7 +8,6 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
-import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.HasCapabilities;
 import org.testng.*;
 import org.testng.reporters.XMLReporter;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Log4j2
+@Slf4j
 public class TestListener extends XMLReporter implements IReporter, ITestListener, ISuiteListener {
 
     private Map<String, Object> capabilities;

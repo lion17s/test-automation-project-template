@@ -1,12 +1,12 @@
 package ta.core.utils;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Arrays;
 
 import java.io.File;
 
-@Log4j2
+@Slf4j
 public class FileUtil {
 
     public static File findFile(String name, String extension) {
