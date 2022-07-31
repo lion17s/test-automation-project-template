@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: allure-report
-          path: ./build/reports/allure-results
+          path: ./build/allure-results
