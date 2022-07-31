@@ -37,14 +37,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Print iOS SDK version
-        run: xcrun --sdk iphonesimulator --show-sdk-version
       - name: Install Appium Server
-        run: npm install -g appium
+        run: npm install appium --location=global
       - name: Run Appium Server
         run: appium -p 4723 --log appium.log &
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      - name: Print iOS SDK version
+        run: xcrun --sdk iphonesimulator --show-sdk-version
       - name: Get available simulators
         run: xcrun simctl list
       - name: Test with Gradle
