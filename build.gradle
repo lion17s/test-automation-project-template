@@ -76,17 +76,17 @@ dependencies {
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.+'
     // https://mvnrepository.com/artifact/io.appium/java-client
-    implementation group: 'io.appium', name: 'java-client', version: '7.+'
+    implementation group: 'io.appium', name: 'java-client', version: '8.+'
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
-    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.+'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.+'
 
     // api testing libs
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
-    implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.+'
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.+'
     // https://mvnrepository.com/artifact/io.qameta.allure/allure-rest-assured
     implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.+'
     // https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator
-    implementation (group: 'io.rest-assured', name: 'json-schema-validator', version: '4.+') {
+    implementation (group: 'io.rest-assured', name: 'json-schema-validator', version: '5.+') {
         exclude group: "com.google.guava", module: "guava" }
     // https://mvnrepository.com/artifact/net.javacrumbs.json-unit/json-unit
     implementation group: 'net.javacrumbs.json-unit', name: 'json-unit', version: '2.+'
