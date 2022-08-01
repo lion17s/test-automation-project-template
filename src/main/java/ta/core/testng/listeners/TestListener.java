@@ -31,7 +31,7 @@ public class TestListener extends XMLReporter implements IReporter, ITestListene
         log.info("{} execution started", suite.getName());
         super.getConfig().setGenerateTestResultAttributes(true);
         RestAssured.filters(new AllureRestAssured());
-        if (log.isDebugEnabled()) {
+        if (log.isInfoEnabled()) {
             RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         }
     }

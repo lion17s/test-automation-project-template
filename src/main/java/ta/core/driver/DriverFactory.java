@@ -34,42 +34,42 @@ public class DriverFactory {
     private static final ThreadLocal<WebDriver> DRIVER_INSTANCE = new ThreadLocal<>();
 
     private static String getPlatformNameFromCapabilities(Map<String, Object> capabilities) {
-        log.debug("getting <platformName> capability");
+        log.info("getting platform name capability");
         var platformName = capabilities.getOrDefault("platformName", "").toString();
-        log.debug("gotten <platformName>: {}", platformName);
+        log.info("platform name is <{}>", platformName);
         return platformName;
     }
 
     @SneakyThrows
     private static URL getURLFromCapabilities(Map<String, Object> capabilities) {
-        log.debug("getting <URL> from capabilities");
+        log.info("getting url from capabilities");
         var url = new URL(capabilities.getOrDefault("hub", "").toString());
-        log.debug("gotten <URL>: {}", url);
+        log.info("url is <{}>", url);
         return url;
     }
 
     private static WebDriver createDecoratedEventFiringDriver(WebDriver driver) {
-        log.debug("creating driver event listener");
+        log.info("creating driver event listener");
         var decoratedWebDriver = new EventFiringDecorator(new WebDriverEventListener()).decorate(driver);
-        log.debug("driver event listener created");
+        log.info("driver event listener created");
         return decoratedWebDriver;
     }
 
     private static AppiumDriver initAppiumDriver(Map<String, Object> capabilities) {
-        log.debug("initializing appium driver");
+        log.info("initializing appium driver");
         var url = getURLFromCapabilities(capabilities);
         var platformName = getPlatformNameFromCapabilities(capabilities);
         var desiredCapabilities = new DesiredCapabilities(capabilities);
         if (platformName.equalsIgnoreCase(Platform.ANDROID.name())) {
             var androidDriver = new AndroidDriver(url, desiredCapabilities);
-            log.debug("appium android driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
+            log.info("appium android driver initialized with capabilities: <{}> and <{}>", url, desiredCapabilities);
             return androidDriver;
         } else if (platformName.equalsIgnoreCase(Platform.IOS.name())) {
             var iosDriver = new IOSDriver(url, desiredCapabilities);
-            log.debug("appium ios driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
+            log.info("appium ios driver initialized with capabilities: <{}> and <{}>", url, desiredCapabilities);
             return iosDriver;
         } else {
-            throw new ExceptionInInitializerError("missing <platformName> capability");
+            throw new ExceptionInInitializerError("missing platformName capability");
         }
     }
 
@@ -77,10 +77,10 @@ public class DriverFactory {
         if (!getURLFromCapabilities(capabilities).toString().isEmpty()) {
             var url = getURLFromCapabilities(capabilities);
             var remoteWebDriver = new RemoteWebDriver(url, new DesiredCapabilities(capabilities));
-            log.debug("remote web driver initialized with capabilities: {}\n{}", url, capabilities);
+            log.info("remote web driver initialized with capabilities: <{}> and <{}>", url, capabilities);
             return createDecoratedEventFiringDriver(remoteWebDriver);
         } else {
-            throw new ExceptionInInitializerError("missing <hub> capability");
+            throw new ExceptionInInitializerError("missing hub capability");
         }
     }
 
@@ -93,7 +93,7 @@ public class DriverFactory {
             capabilities.forEach(chromeOptions::setCapability);
             chromeOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
             driver = new ChromeDriver(chromeOptions);
-            log.debug("chrome driver initialized with options:\n{}", chromeOptions);
+            log.info("chrome driver initialized with options: <{}>", chromeOptions);
             return createDecoratedEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
@@ -101,23 +101,23 @@ public class DriverFactory {
             capabilities.forEach(firefoxOptions::setCapability);
             firefoxOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
             driver = new FirefoxDriver(firefoxOptions);
-            log.debug("firefox driver initialized with options:\n{}", firefoxOptions);
+            log.info("firefox driver initialized with options: <{}>", firefoxOptions);
             return createDecoratedEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("safari")) {
             var safariOptions = new SafariOptions();
             capabilities.forEach(safariOptions::setCapability);
             driver = new SafariDriver(safariOptions);
-            log.debug("safari driver initialized with options:\n{}", safariOptions);
+            log.info("safari driver initialized with options: <{}>", safariOptions);
             return createDecoratedEventFiringDriver(driver);
         } else if (driverName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             var edgeOptions = new EdgeOptions();
             capabilities.forEach(edgeOptions::setCapability);
             driver = new EdgeDriver(edgeOptions);
-            log.debug("edge driver initialized with options:\n{}", edgeOptions);
+            log.info("edge driver initialized with options: <{}>", edgeOptions);
             return createDecoratedEventFiringDriver(driver);
         } else {
-            throw new ExceptionInInitializerError("missing <driver> capability");
+            throw new ExceptionInInitializerError("missing driver capability");
         }
     }
 

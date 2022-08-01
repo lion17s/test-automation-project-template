@@ -14,11 +14,11 @@ public class Environment {
     public static void setEnvironment(String env) {
         ENVIRONMENT.set(env);
         if (ENVIRONMENT.get().isEmpty()) {
-            log.debug("environment name is empty");
+            log.info("environment name is empty");
             throw new ExceptionInInitializerError(
                     "please choose environment name from environment.conf file");
         } else {
-            log.debug("getting configs from <{}>", ENVIRONMENT.get());
+            log.info("getting configs from <{}>", ENVIRONMENT.get());
             var configFile = FileUtil.findFile("environment", "conf");
             var config = ConfigFactory.parseFile(configFile);
             var defaultEnv = config.getConfig("env.default");
@@ -28,13 +28,13 @@ public class Environment {
 
     @SuppressWarnings("unchecked")
     public static <T> T getOrDefault(String path, T defaultValue) {
-        log.debug("getting value by path <{}>", path);
+        log.info("getting value by path <{}>", path);
         if (CURRENT_CONFIG.get().hasPath(path)) {
             T value = (T) CURRENT_CONFIG.get().getAnyRef(path);
-            log.debug("<{}> value is: <{}>", path, value);
+            log.info("<{}> value is <{}>", path, value);
             return value;
         } else {
-            log.debug("cannot find path <{}> returning default value: <{}>", path, defaultValue);
+            log.info("cannot find path <{}> returning default value <{}>", path, defaultValue);
             return defaultValue;
         }
     }
