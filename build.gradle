@@ -1,7 +1,7 @@
 plugins {
     id 'idea'
     id 'java'
-    id "io.qameta.allure" version "2.10.0"
+    id 'io.qameta.allure' version '2.10.0'
 }
 
 repositories {
@@ -35,14 +35,14 @@ test {
         if (System.getProperty('threadCount') != null) {
             options.threadCount System.getProperty('threadCount') as int
         }
-        if (System.getProperty("includeGroups") != null) {
-            options.includeGroups System.getProperty("includeGroups")
+        if (System.getProperty('includeGroups') != null) {
+            options.includeGroups System.getProperty('includeGroups')
         }
-        if (System.getProperty("excludeGroups") != null) {
-            options.excludeGroups System.getProperty("excludeGroups")
+        if (System.getProperty('excludeGroups') != null) {
+            options.excludeGroups System.getProperty('excludeGroups')
         }
-        if (System.getProperty("suites") != null) {
-            options.suites System.getProperty("suites")
+        if (System.getProperty('suites') != null) {
+            options.suites System.getProperty('suites')
         }
         testLogging {
             events = ['PASSED', 'FAILED', 'SKIPPED']
