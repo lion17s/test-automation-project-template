@@ -13,6 +13,7 @@ import org.testng.*;
 import org.testng.reporters.XMLReporter;
 import org.testng.xml.XmlSuite;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Log4j2
 public class TestListener extends XMLReporter implements IReporter, ITestListener, ISuiteListener {
 
-    private Map<String, Object> capabilities;
+    private Map<String, Object> capabilities = new HashMap<>();
     private boolean shouldAlwaysAttachScreenshot;
     private boolean shouldAlwaysAttachVideo;
     private boolean shouldAttachScreenshot;

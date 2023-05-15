@@ -1,6 +1,7 @@
 package ta.core.driver;
 
-import ta.core.testng.listeners.DriverEventListener;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -19,11 +20,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.Method;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 @Log4j2
@@ -47,26 +50,31 @@ public class DriverFactory {
         return url;
     }
 
-    private static EventFiringWebDriver registerEventFiringDriver(WebDriver driver) {
-        log.debug("registering firing event driver");
-        var eventFiringWebDriver = new EventFiringWebDriver(driver);
-        var driverEventListener = new DriverEventListener();
-        eventFiringWebDriver.register(driverEventListener);
-        log.debug("event firing driver registered");
-        return eventFiringWebDriver;
+    private static WebDriver decorateDriver(WebDriver driver) {
+        log.debug("decorating driver");
+        var listener = new WebDriverListener() {
+            @Override
+            public void afterAnyCall(Object target, Method method, Object[] args, Object result) {
+                var param = (null != args) ? Arrays.toString(args) : "";
+                log.debug(method.getName() + " " + param);
+            }
+        };
+        var decoratedDriver = new EventFiringDecorator<>(listener).decorate(driver);
+        log.debug("driver decorated");
+        return decoratedDriver;
     }
 
-    private static AppiumDriver<?> initAppiumDriver(Map<String, Object> capabilities) {
+    private static AppiumDriver initAppiumDriver(Map<String, Object> capabilities) {
         log.debug("initializing appium driver");
         var url = getURLFromCapabilities(capabilities);
         var platformName = getPlatformNameFromCapabilities(capabilities);
         var desiredCapabilities = new DesiredCapabilities(capabilities);
         if (platformName.equalsIgnoreCase(Platform.ANDROID.name())) {
-            var androidDriver = new AndroidDriver<>(url, desiredCapabilities);
+            var androidDriver = new AndroidDriver(url, desiredCapabilities);
             log.debug("appium android driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
             return androidDriver;
         } else if (platformName.equalsIgnoreCase(Platform.IOS.name())) {
-            var iosDriver = new IOSDriver<>(url, desiredCapabilities);
+            var iosDriver = new IOSDriver(url, desiredCapabilities);
             log.debug("appium ios driver initialized with capabilities: {}\n{}", url, desiredCapabilities);
             return iosDriver;
         } else {
@@ -79,7 +87,7 @@ public class DriverFactory {
             var url = getURLFromCapabilities(capabilities);
             var remoteWebDriver = new RemoteWebDriver(url, new DesiredCapabilities(capabilities));
             log.debug("remote web driver initialized with capabilities: {}\n{}", url, capabilities);
-            return registerEventFiringDriver(remoteWebDriver);
+            return decorateDriver(remoteWebDriver);
         } else {
             throw new ExceptionInInitializerError("missing <hub> capability");
         }
@@ -91,32 +99,30 @@ public class DriverFactory {
         if (driverName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             var chromeOptions = new ChromeOptions();
-            capabilities.forEach(chromeOptions::setCapability);
-            chromeOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
+            chromeOptions.addArguments((ArrayList) capabilities.getOrDefault("args", new ArrayList<>()));
             driver = new ChromeDriver(chromeOptions);
             log.debug("chrome driver initialized with options:\n{}", chromeOptions);
-            return registerEventFiringDriver(driver);
+            return decorateDriver(driver);
         } else if (driverName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             var firefoxOptions = new FirefoxOptions();
-            capabilities.forEach(firefoxOptions::setCapability);
-            firefoxOptions.addArguments((ArrayList) capabilities.getOrDefault("arguments", new ArrayList<>()));
+            firefoxOptions.addArguments((ArrayList) capabilities.getOrDefault("args", new ArrayList<>()));
             driver = new FirefoxDriver(firefoxOptions);
             log.debug("firefox driver initialized with options:\n{}", firefoxOptions);
-            return registerEventFiringDriver(driver);
+            return decorateDriver(driver);
         } else if (driverName.equalsIgnoreCase("safari")) {
             var safariOptions = new SafariOptions();
             capabilities.forEach(safariOptions::setCapability);
             driver = new SafariDriver(safariOptions);
             log.debug("safari driver initialized with options:\n{}", safariOptions);
-            return registerEventFiringDriver(driver);
+            return decorateDriver(driver);
         } else if (driverName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             var edgeOptions = new EdgeOptions();
             capabilities.forEach(edgeOptions::setCapability);
             driver = new EdgeDriver(edgeOptions);
             log.debug("edge driver initialized with options:\n{}", edgeOptions);
-            return registerEventFiringDriver(driver);
+            return decorateDriver(driver);
         } else {
             throw new ExceptionInInitializerError("missing <driver> capability");
         }
@@ -149,14 +155,13 @@ public class DriverFactory {
     }
 
     public static WebDriverWait getDriverWait(int timeOutInSeconds) {
-        return new WebDriverWait(DRIVER_INSTANCE.get(), timeOutInSeconds);
+        return new WebDriverWait(DRIVER_INSTANCE.get(), Duration.ofSeconds(timeOutInSeconds));
     }
 
     public static void quitDriver() {
         if (DRIVER_INSTANCE.get() != null) {
             DRIVER_INSTANCE.get().quit();
             DRIVER_INSTANCE.remove();
-            log.debug("driver quit");
         }
     }
 
