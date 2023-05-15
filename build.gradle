@@ -1,7 +1,7 @@
 plugins {
     id 'idea'
     id 'java'
-    id("io.qameta.allure") version "2.11.2"
+    id ("io.qameta.allure") version "2.+"
 }
 
 repositories {
@@ -52,7 +52,7 @@ test {
 dependencies {
     // logging libs
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.+'
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-core
