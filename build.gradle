@@ -19,36 +19,44 @@ allure {
     version = '2.+'
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 gradle.startParameter.continueOnFailure = true
 
 test {
     systemProperties System.getProperties()
     useTestNG() {
         options.useDefaultListeners true
-        options.parallel System.getProperty('parallel', 'suites')
-        options.threadCount System.getProperty('threadCount', '1') as int
-        if (System.getProperty("includeGroups") != null) {
-            options.includeGroups System.getProperty("includeGroups")
+        if (System.getProperty('parallel') != null) {
+            options.parallel System.getProperty('parallel')
         }
-        if (System.getProperty("excludeGroups") != null) {
-            options.excludeGroups System.getProperty("excludeGroups")
+        if (System.getProperty('threadCount') != null) {
+            options.threadCount System.getProperty('threadCount') as int
         }
-        if (System.getProperty("suites") != null) {
-            options.suites System.getProperty("suites")
+        if (System.getProperty('includeGroups') != null) {
+            options.includeGroups System.getProperty('includeGroups')
+        }
+        if (System.getProperty('excludeGroups') != null) {
+            options.excludeGroups System.getProperty('excludeGroups')
+        }
+        if (System.getProperty('suites') != null) {
+            options.suites System.getProperty('suites')
         }
         testLogging {
             events = ['PASSED', 'FAILED', 'SKIPPED']
         }
     }
-    reports.html.enabled = false
 }
 
 dependencies {
     // logging libs
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.+'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.11'
 
     // config libs
     // https://mvnrepository.com/artifact/com.typesafe/config

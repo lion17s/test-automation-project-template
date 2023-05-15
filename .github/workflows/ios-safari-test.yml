@@ -37,14 +37,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Print iOS SDK version
-        run: xcrun --sdk iphonesimulator --show-sdk-version
       - name: Install Appium Server
-        run: npm install -g appium
+        run: npm install appium --location=global
       - name: Run Appium Server
         run: appium -p 4723 --log appium.log &
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      - name: Print iOS SDK version
+        run: xcrun --sdk iphonesimulator --show-sdk-version
       - name: Get available simulators
         run: xcrun simctl list
       - name: Test with Gradle
@@ -52,13 +52,9 @@ jobs:
       - name: Print Appium logs
         if: ${{ always() }}
         run: cat appium.log
-      - name: Download Allure CLI
-        if: ${{ always() }}
-        run: ./gradlew downloadAllure
-      - name: Generate report
-        run: ./gradlew allureReport
       - name: Upload artifact
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: allure-report
-          path: ./build/reports/allure-report
+          name: allure-results
+          path: ./build/allure-results

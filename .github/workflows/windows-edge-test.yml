@@ -34,13 +34,9 @@ jobs:
         run: chmod +x gradlew.bat
       - name: Test with Gradle
         run: ./gradlew.bat clean test -Denv="desktop.edge" -DincludeGroups="ui.test.example" --info
-      - name: Download Allure CLI
-        if: ${{ always() }}
-        run: ./gradlew.bat downloadAllure
-      - name: Generate report
-        run: ./gradlew.bat allureReport
       - name: Upload artifact
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: allure-report
-          path: ./build/reports/allure-report
+          name: allure-results
+          path: ./build/allure-results
