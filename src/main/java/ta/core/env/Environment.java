@@ -20,7 +20,7 @@ public class Environment {
         } else {
             log.info("getting configs from <{}>", ENVIRONMENT.get());
             var configFile = FileUtil.findFile("environment", "conf");
-            var config = ConfigFactory.parseFile(configFile);
+            var config = ConfigFactory.parseFile(configFile).resolve();
             var defaultEnv = config.getConfig("env.default");
             CURRENT_CONFIG.set(config.getConfig("env." + ENVIRONMENT.get()).withFallback(defaultEnv));
         }

@@ -15,10 +15,6 @@ apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'io.qameta.allure'
 
-allure {
-    version = '2.+'
-}
-
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
@@ -54,9 +50,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.+'
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-core
-    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.11'
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.+'
 
     // config libs
     // https://mvnrepository.com/artifact/com.typesafe/config
@@ -64,8 +60,8 @@ dependencies {
 
     // boilerplate code processor libs
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.+'
+    annotationProcessor 'org.projectlombok:lombok:1.+'
 
     // testing libs
     // https://mvnrepository.com/artifact/org.testng/testng
@@ -75,7 +71,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.+'
     // https://mvnrepository.com/artifact/io.appium/java-client
-    implementation group: 'io.appium', name: 'java-client', version: '8.+'
+    implementation group: 'io.appium', name: 'java-client', version: '9.+'
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.+'
 
